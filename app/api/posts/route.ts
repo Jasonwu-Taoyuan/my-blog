@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
         tags: JSON.stringify(tags || []),
         category,
         status,
-        publishedAt: status === 'published' ? new Date() : null,
+        publishedAt: status === 'published' ? new Date() : undefined,
         readingTimeMinutes,
         authorId: session.user.id,
       },

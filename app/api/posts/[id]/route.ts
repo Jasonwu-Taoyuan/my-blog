@@ -52,7 +52,7 @@ export async function PUT(
         coverImageUrl,
         tags: JSON.stringify(tags),
         status,
-        publishedAt: publishedAt ? new Date(publishedAt) : null,
+        publishedAt: publishedAt ? new Date(publishedAt) : undefined,
       },
     })
 
