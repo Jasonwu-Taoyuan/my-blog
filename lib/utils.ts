@@ -24,3 +24,13 @@ export function formatDate(date: Date | string | null): string {
     day: 'numeric',
   })
 }
+
+export function generateSlug(text: string): string {
+  return slugify(text)
+}
+
+export function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200
+  const wordCount = content.trim().split(/\s+/).length
+  return Math.ceil(wordCount / wordsPerMinute)
+}
