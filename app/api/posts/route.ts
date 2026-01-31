@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
     const readingTimeMinutes = calculateReadingTime(content)
 
     const post = await prisma.post.create({
-      data: removeNullValues({
+      data: {
         title,
         slug,
         summary,
@@ -107,10 +107,10 @@ export async function POST(request: NextRequest) {
         status,
         readingTimeMinutes,
         authorId: session.user.id,
-        coverImageUrl,
-        category,
-        publishedAt: status === 'published' ? new Date() : null,
-      }) as Prisma.PostCreateInput,
+        ...(coverImageUrl && { coverImageUrl }),
+        ...(category && { category }),
+        ...(status === 'published' && { publishedAt: new Date() }),
+      },
     })
 
     return NextResponse.json({

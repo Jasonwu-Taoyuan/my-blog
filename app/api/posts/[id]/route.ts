@@ -46,16 +46,16 @@ export async function PUT(
 
     const post = await prisma.post.update({
       where: { id },
-      data: removeNullValues({
+      data: {
         title,
         slug,
         summary,
         content,
         tags: JSON.stringify(tags),
         status,
-        coverImageUrl,
-        publishedAt: publishedAt ? new Date(publishedAt) : null,
-      }) as Prisma.PostUpdateInput,
+        ...(coverImageUrl && { coverImageUrl }),
+        ...(publishedAt && { publishedAt: new Date(publishedAt) }),
+      },
     })
 
     return NextResponse.json(post)

@@ -48,14 +48,14 @@ export async function POST(request: NextRequest) {
     }
 
     const photo = await prisma.photo.create({
-      data: removeNullValues({
+      data: {
         imageUrl,
-        title,
-        album,
-        description,
-        takenAt: takenAt ? new Date(takenAt) : null,
-        linkUrl,
-      }) as Prisma.PhotoCreateInput,
+        ...(title && { title }),
+        ...(album && { album }),
+        ...(description && { description }),
+        ...(takenAt && { takenAt: new Date(takenAt) }),
+        ...(linkUrl && { linkUrl }),
+      },
     })
 
     return NextResponse.json(photo)
