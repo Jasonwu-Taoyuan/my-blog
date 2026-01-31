@@ -15,8 +15,8 @@ export default function PostContent({ content }: PostContentProps) {
           img: ({ node, ...props }) => (
             <span className="block my-4">
               <Image
-                src={props.src || ''}
-                alt={props.alt || ''}
+                src={String(props.src || '')}
+                alt={String(props.alt || '')}
                 width={800}
                 height={500}
                 className="rounded-lg"
