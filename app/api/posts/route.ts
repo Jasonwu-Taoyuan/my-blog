@@ -98,12 +98,12 @@ export async function POST(request: NextRequest) {
     const readingTimeMinutes = calculateReadingTime(content)
 
     const data: Prisma.PostCreateInput = {
-      title,
-      slug,
-      summary,
-      content,
+      title: title as string,
+      slug: slug as string,
+      summary: summary as string,
+      content: content as string,
       tags: JSON.stringify(tags || []),
-      status,
+      status: status as string,
       readingTimeMinutes,
       author: { connect: { id: session.user.id } },
     }

@@ -45,12 +45,12 @@ export async function PUT(
     const { title, slug, summary, content, coverImageUrl, tags, status, publishedAt } = body
 
     const data: Prisma.PostUpdateInput = {
-      title,
-      slug,
-      summary,
-      content,
+      title: title as string,
+      slug: slug as string,
+      summary: summary as string,
+      content: content as string,
       tags: JSON.stringify(tags),
-      status,
+      status: status as string,
     }
 
     if (coverImageUrl) {

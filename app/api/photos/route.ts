@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     }
 
     const data: Prisma.PhotoCreateInput = {
-      imageUrl,
+      imageUrl: imageUrl as string,
     }
 
     if (title) {
