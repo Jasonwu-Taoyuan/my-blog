@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Prisma } from '@prisma/client'
 
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
@@ -54,7 +55,7 @@ export async function POST(request: NextRequest) {
         description,
         takenAt: takenAt ? new Date(takenAt) : null,
         linkUrl,
-      }),
+      }) as Prisma.PhotoCreateInput,
     })
 
     return NextResponse.json(photo)

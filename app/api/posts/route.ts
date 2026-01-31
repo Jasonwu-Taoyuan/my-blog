@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Prisma } from '@prisma/client'
 
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
@@ -109,7 +110,7 @@ export async function POST(request: NextRequest) {
         coverImageUrl,
         category,
         publishedAt: status === 'published' ? new Date() : null,
-      }),
+      }) as Prisma.PostCreateInput,
     })
 
     return NextResponse.json({

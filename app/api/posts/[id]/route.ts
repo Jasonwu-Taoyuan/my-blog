@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { auth } from '@/auth'
 import { removeNullValues } from '@/lib/utils'
@@ -54,7 +55,7 @@ export async function PUT(
         status,
         coverImageUrl,
         publishedAt: publishedAt ? new Date(publishedAt) : null,
-      }),
+      }) as Prisma.PostUpdateInput,
     })
 
     return NextResponse.json(post)

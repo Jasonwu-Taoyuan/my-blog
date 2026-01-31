@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Prisma } from '@prisma/client'
 
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
@@ -20,7 +21,7 @@ export async function PATCH(
 
     const photo = await prisma.photo.update({
       where: { id },
-      data: removeNullValues({ description }),
+      data: removeNullValues({ description }) as Prisma.PhotoUpdateInput,
     })
 
     return NextResponse.json(photo)
