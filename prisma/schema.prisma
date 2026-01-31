@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+}
+
+model Post {
+  id                 String    @id @default(cuid())
+  title              String
+  slug               String    @unique
+  summary            String
+  content            String
+  coverImageUrl      String?
+  tags               String
+  category           String?
+  status             String    @default("draft")
+  publishedAt        DateTime?
+  readingTimeMinutes Int       @default(5)
+  authorId           String
+  author             User      @relation(fields: [authorId], references: [id])
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([status])
+  @@index([publishedAt])
+}
+
+model Photo {
+  id          String    @id @default(cuid())
+  title       String?
+  imageUrl    String
+  album       String?
+  description String?
+  takenAt     DateTime?
+  linkUrl     String?
+  createdAt   DateTime  @default(now())
+
+  @@index([album])
+}
+
+model About {
+  id          String   @id @default(cuid())
+  displayName String
+  headline    String
+  bioMarkdown String
+  links       String
+  experience  String?
+  skills      String?
+  updatedAt   DateTime @updatedAt
+}
