@@ -49,7 +49,7 @@ export async function PUT(
         slug,
         summary,
         content,
-        coverImageUrl,
+        coverImageUrl: coverImageUrl ?? undefined,
         tags: JSON.stringify(tags),
         status,
         publishedAt: publishedAt ? new Date(publishedAt) : undefined,
