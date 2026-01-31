@@ -97,21 +97,28 @@ export async function POST(request: NextRequest) {
     const slug = generateSlug(title)
     const readingTimeMinutes = calculateReadingTime(content)
 
-    const post = await prisma.post.create({
-      data: {
-        title,
-        slug,
-        summary,
-        content,
-        tags: JSON.stringify(tags || []),
-        status,
-        readingTimeMinutes,
-        authorId: session.user.id,
-        ...(coverImageUrl !== null && coverImageUrl !== undefined && { coverImageUrl }),
-        ...(category !== null && category !== undefined && { category }),
-        ...(status === 'published' && { publishedAt: new Date() }),
-      },
-    })
+    const data: any = {
+      title,
+      slug,
+      summary,
+      content,
+      tags: JSON.stringify(tags || []),
+      status,
+      readingTimeMinutes,
+      authorId: session.user.id,
+    }
+
+    if (coverImageUrl !== null && coverImageUrl !== undefined) {
+      data.coverImageUrl = coverImageUrl
+    }
+    if (category !== null && category !== undefined) {
+      data.category = category
+    }
+    if (status === 'published') {
+      data.publishedAt = new Date()
+    }
+
+    const post = await prisma.post.create({ data })
 
     return NextResponse.json({
       ...post,
