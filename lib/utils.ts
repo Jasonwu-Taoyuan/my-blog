@@ -34,3 +34,7 @@ export function calculateReadingTime(content: string): number {
   const wordCount = content.trim().split(/\s+/).length
   return Math.ceil(wordCount / wordsPerMinute)
 }
+
+export function nullToUndefined<T>(value: T | null): T | undefined {
+  return value === null ? undefined : value
+}

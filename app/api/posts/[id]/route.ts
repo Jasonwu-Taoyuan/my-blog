@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { auth } from '@/auth'
+import { nullToUndefined } from '@/lib/utils'
 
 export async function GET(
   request: Request,
@@ -49,7 +50,7 @@ export async function PUT(
         slug,
         summary,
         content,
-        coverImageUrl: coverImageUrl ?? undefined,
+        coverImageUrl: nullToUndefined(coverImageUrl),
         tags: JSON.stringify(tags),
         status,
         publishedAt: publishedAt ? new Date(publishedAt) : undefined,

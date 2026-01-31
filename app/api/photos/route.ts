@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
+import { nullToUndefined } from '@/lib/utils'
 
 export async function GET(request: NextRequest) {
   try {
@@ -47,12 +48,12 @@ export async function POST(request: NextRequest) {
 
     const photo = await prisma.photo.create({
       data: {
-        title: title ?? undefined,
+        title: nullToUndefined(title),
         imageUrl,
-        album: album ?? undefined,
-        description: description ?? undefined,
+        album: nullToUndefined(album),
+        description: nullToUndefined(description),
         takenAt: takenAt ? new Date(takenAt) : undefined,
-        linkUrl: linkUrl ?? undefined,
+        linkUrl: nullToUndefined(linkUrl),
       },
     })
 

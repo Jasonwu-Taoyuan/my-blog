@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
-import { generateSlug, calculateReadingTime } from '@/lib/utils'
+import { generateSlug, calculateReadingTime, nullToUndefined } from '@/lib/utils'
 
 export async function GET(request: NextRequest) {
   try {
@@ -102,9 +102,9 @@ export async function POST(request: NextRequest) {
         slug,
         summary,
         content,
-        coverImageUrl: coverImageUrl ?? undefined,
+        coverImageUrl: nullToUndefined(coverImageUrl),
         tags: JSON.stringify(tags || []),
-        category: category ?? undefined,
+        category: nullToUndefined(category),
         status,
         publishedAt: status === 'published' ? new Date() : undefined,
         readingTimeMinutes,
