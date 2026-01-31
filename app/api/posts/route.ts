@@ -107,9 +107,9 @@ export async function POST(request: NextRequest) {
         status,
         readingTimeMinutes,
         authorId: session.user.id,
-        coverImageUrl: coverImageUrl ?? undefined,
-        category: category ?? undefined,
-        publishedAt: status === 'published' ? new Date() : undefined,
+        ...(coverImageUrl ? { coverImageUrl } : {}),
+        ...(category ? { category } : {}),
+        ...(status === 'published' ? { publishedAt: new Date() } : {}),
       },
     })
 

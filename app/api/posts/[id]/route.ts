@@ -53,8 +53,8 @@ export async function PUT(
         content,
         tags: JSON.stringify(tags),
         status,
-        coverImageUrl: coverImageUrl ?? undefined,
-        publishedAt: publishedAt ? new Date(publishedAt) : undefined,
+        ...(coverImageUrl ? { coverImageUrl } : {}),
+        ...(publishedAt ? { publishedAt: new Date(publishedAt) } : {}),
       },
     })
 

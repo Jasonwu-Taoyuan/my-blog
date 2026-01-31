@@ -50,11 +50,11 @@ export async function POST(request: NextRequest) {
     const photo = await prisma.photo.create({
       data: {
         imageUrl,
-        title: title ?? undefined,
-        album: album ?? undefined,
-        description: description ?? undefined,
-        takenAt: takenAt ? new Date(takenAt) : undefined,
-        linkUrl: linkUrl ?? undefined,
+        ...(title ? { title } : {}),
+        ...(album ? { album } : {}),
+        ...(description ? { description } : {}),
+        ...(takenAt ? { takenAt: new Date(takenAt) } : {}),
+        ...(linkUrl ? { linkUrl } : {}),
       },
     })
 

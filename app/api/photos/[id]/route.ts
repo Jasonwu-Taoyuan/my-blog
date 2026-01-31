@@ -22,7 +22,7 @@ export async function PATCH(
     const photo = await prisma.photo.update({
       where: { id },
       data: {
-        description: description ?? undefined,
+        ...(description ? { description } : {}),
       },
     })
 
