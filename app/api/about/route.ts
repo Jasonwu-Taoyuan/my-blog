@@ -54,8 +54,8 @@ export async function PUT(request: NextRequest) {
       headline,
       bioMarkdown,
       links: JSON.stringify(links || []),
-      experience: experience ? JSON.stringify(experience) : null,
-      skills: skills ? JSON.stringify(skills) : null,
+      experience: experience ? JSON.stringify(experience) : undefined,
+      skills: skills ? JSON.stringify(skills) : undefined,
     }
 
     let about

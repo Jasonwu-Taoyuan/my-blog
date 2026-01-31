@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
         imageUrl,
         album,
         description,
-        takenAt: takenAt ? new Date(takenAt) : null,
+        takenAt: takenAt ? new Date(takenAt) : undefined,
         linkUrl,
       },
     })
