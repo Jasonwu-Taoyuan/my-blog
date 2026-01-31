@@ -38,3 +38,9 @@ export function calculateReadingTime(content: string): number {
 export function nullToUndefined<T>(value: T | null): T | undefined {
   return value === null ? undefined : value
 }
+
+export function removeNullValues<T extends Record<string, any>>(obj: T): Partial<T> {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([_, value]) => value !== null)
+  ) as Partial<T>
+}

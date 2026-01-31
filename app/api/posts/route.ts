@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
-import { generateSlug, calculateReadingTime, nullToUndefined } from '@/lib/utils'
+import { generateSlug, calculateReadingTime, removeNullValues } from '@/lib/utils'
 
 export async function GET(request: NextRequest) {
   try {
@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
     const readingTimeMinutes = calculateReadingTime(content)
 
     const post = await prisma.post.create({
-      data: {
+      data: removeNullValues({
         title,
         slug,
         summary,
@@ -106,10 +106,10 @@ export async function POST(request: NextRequest) {
         status,
         readingTimeMinutes,
         authorId: session.user.id,
-        ...(coverImageUrl !== null && { coverImageUrl }),
-        ...(category !== null && { category }),
-        ...(status === 'published' && { publishedAt: new Date() }),
-      },
+        coverImageUrl,
+        category,
+        publishedAt: status === 'published' ? new Date() : null,
+      }),
     })
 
     return NextResponse.json({

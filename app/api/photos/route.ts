@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
-import { nullToUndefined } from '@/lib/utils'
+import { removeNullValues } from '@/lib/utils'
 
 export async function GET(request: NextRequest) {
   try {
@@ -47,14 +47,14 @@ export async function POST(request: NextRequest) {
     }
 
     const photo = await prisma.photo.create({
-      data: {
+      data: removeNullValues({
         imageUrl,
-        ...(title !== null && { title }),
-        ...(album !== null && { album }),
-        ...(description !== null && { description }),
-        ...(takenAt && { takenAt: new Date(takenAt) }),
-        ...(linkUrl !== null && { linkUrl }),
-      },
+        title,
+        album,
+        description,
+        takenAt: takenAt ? new Date(takenAt) : null,
+        linkUrl,
+      }),
     })
 
     return NextResponse.json(photo)

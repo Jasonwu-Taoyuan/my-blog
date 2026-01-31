@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { auth } from '@/auth'
-import { nullToUndefined } from '@/lib/utils'
+import { removeNullValues } from '@/lib/utils'
 
 export async function GET(
   request: Request,
@@ -45,16 +45,16 @@ export async function PUT(
 
     const post = await prisma.post.update({
       where: { id },
-      data: {
+      data: removeNullValues({
         title,
         slug,
         summary,
         content,
         tags: JSON.stringify(tags),
         status,
-        ...(coverImageUrl !== null && { coverImageUrl }),
-        ...(publishedAt && { publishedAt: new Date(publishedAt) }),
-      },
+        coverImageUrl,
+        publishedAt: publishedAt ? new Date(publishedAt) : null,
+      }),
     })
 
     return NextResponse.json(post)
