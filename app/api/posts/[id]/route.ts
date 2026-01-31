@@ -44,18 +44,25 @@ export async function PUT(
     const body = await request.json()
     const { title, slug, summary, content, coverImageUrl, tags, status, publishedAt } = body
 
+    const data: Prisma.PostUpdateInput = {
+      title,
+      slug,
+      summary,
+      content,
+      tags: JSON.stringify(tags),
+      status,
+    }
+
+    if (coverImageUrl) {
+      data.coverImageUrl = String(coverImageUrl)
+    }
+    if (publishedAt) {
+      data.publishedAt = new Date(publishedAt)
+    }
+
     const post = await prisma.post.update({
       where: { id },
-      data: {
-        title,
-        slug,
-        summary,
-        content,
-        tags: JSON.stringify(tags),
-        status,
-        ...(coverImageUrl ? { coverImageUrl } : {}),
-        ...(publishedAt ? { publishedAt: new Date(publishedAt) } : {}),
-      },
+      data,
     })
 
     return NextResponse.json(post)

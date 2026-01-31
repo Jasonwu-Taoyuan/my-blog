@@ -19,11 +19,15 @@ export async function PATCH(
     const body = await request.json()
     const { description } = body
 
+    const data: Prisma.PhotoUpdateInput = {}
+
+    if (description) {
+      data.description = String(description)
+    }
+
     const photo = await prisma.photo.update({
       where: { id },
-      data: {
-        ...(description ? { description } : {}),
-      },
+      data,
     })
 
     return NextResponse.json(photo)

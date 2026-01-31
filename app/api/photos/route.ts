@@ -47,16 +47,27 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const photo = await prisma.photo.create({
-      data: {
-        imageUrl,
-        ...(title ? { title } : {}),
-        ...(album ? { album } : {}),
-        ...(description ? { description } : {}),
-        ...(takenAt ? { takenAt: new Date(takenAt) } : {}),
-        ...(linkUrl ? { linkUrl } : {}),
-      },
-    })
+    const data: Prisma.PhotoCreateInput = {
+      imageUrl,
+    }
+
+    if (title) {
+      data.title = String(title)
+    }
+    if (album) {
+      data.album = String(album)
+    }
+    if (description) {
+      data.description = String(description)
+    }
+    if (takenAt) {
+      data.takenAt = new Date(takenAt)
+    }
+    if (linkUrl) {
+      data.linkUrl = String(linkUrl)
+    }
+
+    const photo = await prisma.photo.create({ data })
 
     return NextResponse.json(photo)
   } catch (error) {
