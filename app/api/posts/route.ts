@@ -102,13 +102,13 @@ export async function POST(request: NextRequest) {
         slug,
         summary,
         content,
-        coverImageUrl: nullToUndefined(coverImageUrl),
         tags: JSON.stringify(tags || []),
-        category: nullToUndefined(category),
         status,
-        publishedAt: status === 'published' ? new Date() : undefined,
         readingTimeMinutes,
         authorId: session.user.id,
+        ...(coverImageUrl !== null && { coverImageUrl }),
+        ...(category !== null && { category }),
+        ...(status === 'published' && { publishedAt: new Date() }),
       },
     })
 

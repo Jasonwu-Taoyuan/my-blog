@@ -50,10 +50,10 @@ export async function PUT(
         slug,
         summary,
         content,
-        coverImageUrl: nullToUndefined(coverImageUrl),
         tags: JSON.stringify(tags),
         status,
-        publishedAt: publishedAt ? new Date(publishedAt) : undefined,
+        ...(coverImageUrl !== null && { coverImageUrl }),
+        ...(publishedAt && { publishedAt: new Date(publishedAt) }),
       },
     })
 
