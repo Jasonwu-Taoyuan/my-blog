@@ -9,9 +9,9 @@ interface PostCardProps {
     title: string
     slug: string
     summary: string
-    coverImageUrl: string | null
+    coverImageUrl?: string | null
     tags: string[]
-    publishedAt: Date | null
+    publishedAt?: Date | null
     readingTimeMinutes: number
   }
 }
