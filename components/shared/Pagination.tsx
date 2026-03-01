@@ -30,7 +30,7 @@ export default function Pagination({
       {currentPage > 1 && (
         <Link
           href={createPageUrl(currentPage - 1)}
-          className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+          className="inline-flex items-center px-3 py-2 border border-slate-600 rounded-md text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700"
         >
           <ChevronLeft className="h-4 w-4 mr-1" />
           Previous
@@ -50,8 +50,8 @@ export default function Pagination({
                 href={createPageUrl(page)}
                 className={`px-4 py-2 border rounded-md text-sm font-medium ${
                   page === currentPage
-                    ? 'bg-blue-600 text-white border-blue-600'
-                    : 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50'
+                    ? 'bg-amber-600 text-white border-amber-600'
+                    : 'text-slate-300 bg-slate-800 border-slate-600 hover:bg-slate-700'
                 }`}
               >
                 {page}
@@ -59,7 +59,7 @@ export default function Pagination({
             )
           } else if (page === currentPage - 2 || page === currentPage + 2) {
             return (
-              <span key={page} className="px-2 text-gray-500">
+              <span key={page} className="px-2 text-slate-500">
                 ...
               </span>
             )
@@ -71,7 +71,7 @@ export default function Pagination({
       {currentPage < totalPages && (
         <Link
           href={createPageUrl(currentPage + 1)}
-          className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+          className="inline-flex items-center px-3 py-2 border border-slate-600 rounded-md text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700"
         >
           Next
           <ChevronRight className="h-4 w-4 ml-1" />

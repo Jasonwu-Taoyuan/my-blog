@@ -16,6 +16,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@libsql/client": "^0.17.0",
+    "@notionhq/client": "^2.2.15",
     "@prisma/adapter-libsql": "^7.3.0",
     "@prisma/client": "^5.22.0",
     "bcryptjs": "^3.0.3",
@@ -23,6 +24,7 @@
     "clsx": "^2.1.1",
     "easymde": "^2.20.0",
     "lucide-react": "^0.563.0",
+    "mind-elixir": "^5.9.1",
     "next": "16.1.6",
     "next-auth": "^5.0.0-beta.30",
     "prisma": "^5.22.0",

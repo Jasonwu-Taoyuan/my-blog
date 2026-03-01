@@ -11,6 +11,7 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get('status')
     const tag = searchParams.get('tag')
     const q = searchParams.get('q')
+    const category = searchParams.get('category')
     const page = parseInt(searchParams.get('page') || '1')
     const limit = 10
 
@@ -25,6 +26,10 @@ export async function GET(request: NextRequest) {
 
     if (tag) {
       where.tags = { contains: tag }
+    }
+
+    if (category) {
+      where.category = category
     }
 
     if (q) {
@@ -105,7 +110,7 @@ export async function POST(request: NextRequest) {
       tags: JSON.stringify(tags || []),
       status: status as string,
       readingTimeMinutes,
-      author: { connect: { id: session.user.id } },
+      author: { connect: session.user.id ? { id: session.user.id } : { email: session.user.email! } },
     }
 
     if (coverImageUrl) {

@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 body {
-  background-color: rgb(249 250 251);
-  color: rgb(17 24 39);
+  background-color: #0f172a;
+  color: #f1f5f9;
 }
 
-/* Markdown content styling */
+/* Markdown content styling - dark theme */
 .prose {
   max-width: none;
+  color: #cbd5e1;
 }
 
 .prose h1 {
@@ -15,6 +16,7 @@ body {
   font-weight: 700;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  color: #f1f5f9;
 }
 
 .prose h2 {
@@ -22,6 +24,7 @@ body {
   font-weight: 700;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
+  color: #f1f5f9;
 }
 
 .prose h3 {
@@ -29,6 +32,7 @@ body {
   font-weight: 700;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
+  color: #f1f5f9;
 }
 
 .prose p {
@@ -37,12 +41,12 @@ body {
 }
 
 .prose a {
-  color: rgb(37 99 235);
+  color: #c9a96e;
   text-decoration: underline;
 }
 
 .prose a:hover {
-  color: rgb(29 78 216);
+  color: #dfc08a;
 }
 
 .prose ul,
@@ -71,34 +75,66 @@ body {
 
 .prose blockquote {
   border-left-width: 4px;
-  border-color: rgb(209 213 219);
+  border-color: #c9a96e;
   padding-left: 1rem;
   font-style: italic;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  color: #94a3b8;
 }
 
 .prose code {
-  background-color: rgb(243 244 246);
+  background-color: #1e293b;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   border-radius: 0.25rem;
   font-size: 0.875rem;
+  color: #e2e8f0;
 }
 
 .prose pre {
-  background-color: rgb(17 24 39);
-  color: rgb(243 244 246);
+  background-color: #020617;
+  color: #e2e8f0;
   padding: 1rem;
   border-radius: 0.5rem;
   overflow-x: auto;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  border: 1px solid #1e293b;
 }
 
 .prose pre code {
   background-color: transparent;
   padding: 0;
+}
+
+/* SimpleMDE editor dark theme overrides */
+.EasyMDEContainer .CodeMirror {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border-color: #334155;
+}
+
+.EasyMDEContainer .editor-toolbar {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.EasyMDEContainer .editor-toolbar button {
+  color: #94a3b8 !important;
+}
+
+.EasyMDEContainer .editor-toolbar button:hover {
+  background-color: #334155;
+}
+
+.EasyMDEContainer .editor-preview {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+.EasyMDEContainer .CodeMirror-cursor {
+  border-left-color: #c9a96e;
 }

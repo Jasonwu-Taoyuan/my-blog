@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { CATEGORIES } from '@/lib/categories'
 
 export default function Header() {
   const pathname = usePathname()
@@ -12,17 +13,20 @@ export default function Header() {
   const isActive = (path: string) => pathname === path
 
   const navItems = [
-    { href: '/', label: 'Home' },
-    { href: '/posts', label: 'Posts' },
-    { href: '/photos', label: 'Photos' },
-    { href: '/about', label: 'About' },
+    { href: '/', label: '首頁' },
+    ...CATEGORIES.map((cat) => ({
+      href: `/category/${cat.slug}`,
+      label: cat.name,
+    })),
+    { href: '/mind-maps', label: '思維導圖' },
+    { href: '/photos', label: '相片' },
   ]
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b shadow-sm">
+    <header className="sticky top-0 z-50 bg-slate-900/95 border-b border-slate-700/50 backdrop-blur">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-gray-900">
+          <Link href="/" className="text-2xl font-bold text-amber-500 tracking-wide">
             My Blog
           </Link>
 
@@ -34,8 +38,8 @@ export default function Header() {
                 href={item.href}
                 className={`text-sm font-medium transition-colors ${
                   isActive(item.href)
-                    ? 'text-blue-600'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'text-amber-500'
+                    : 'text-slate-300 hover:text-amber-500'
                 }`}
               >
                 {item.label}
@@ -45,7 +49,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden text-slate-300"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
@@ -65,8 +69,8 @@ export default function Header() {
                 href={item.href}
                 className={`block py-2 text-sm font-medium ${
                   isActive(item.href)
-                    ? 'text-blue-600'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'text-amber-500'
+                    : 'text-slate-300 hover:text-amber-500'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >

@@ -6,13 +6,20 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function slugify(text: string): string {
-  return text
+  const slug = text
     .toString()
     .toLowerCase()
     .trim()
     .replace(/\s+/g, '-')
-    .replace(/[^\w\-]+/g, '')
+    .replace(/[^\w\u4e00-\u9fff\u3400-\u4dbf\-]+/g, '')
     .replace(/\-\-+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+  if (!slug) {
+    return Date.now().toString(36)
+  }
+
+  return slug
 }
 
 export function formatDate(date: Date | string | null): string {

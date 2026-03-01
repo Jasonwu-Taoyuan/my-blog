@@ -64,7 +64,7 @@ export default async function PostsPage({ searchParams }: Props) {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">All Posts</h1>
+      <h1 className="text-4xl font-bold text-slate-100 mb-8">All Posts</h1>
 
       {/* Search Bar */}
       <div className="mb-8 max-w-md">
@@ -74,12 +74,12 @@ export default async function PostsPage({ searchParams }: Props) {
       {/* Tags Filter */}
       {allTags.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-sm font-semibold text-gray-700 mb-3">Filter by tag:</h2>
+          <h2 className="text-sm font-semibold text-slate-400 mb-3">Filter by tag:</h2>
           <div className="flex flex-wrap gap-2">
             {tag && (
               <a href="/posts" className="inline-block">
-                <span className="px-3 py-1 text-xs font-medium rounded-full bg-gray-800 text-white hover:bg-gray-700">
-                  Clear filter ×
+                <span className="px-3 py-1 text-xs font-medium rounded-full bg-slate-600 text-slate-200 hover:bg-slate-500">
+                  Clear filter &times;
                 </span>
               </a>
             )}
@@ -98,10 +98,10 @@ export default async function PostsPage({ searchParams }: Props) {
       {/* Active Filters */}
       {(tag || query) && (
         <div className="mb-6">
-          <p className="text-sm text-gray-600">
-            {tag && <span>Tag: <strong>{tag}</strong></span>}
-            {tag && query && ' • '}
-            {query && <span>Search: <strong>{query}</strong></span>}
+          <p className="text-sm text-slate-400">
+            {tag && <span>Tag: <strong className="text-slate-200">{tag}</strong></span>}
+            {tag && query && ' \u2022 '}
+            {query && <span>Search: <strong className="text-slate-200">{query}</strong></span>}
             {' '}({total} {total === 1 ? 'result' : 'results'})
           </p>
         </div>

@@ -4,12 +4,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-900 text-white py-12 mt-20">
+    <footer className="bg-slate-950 text-slate-400 py-12 mt-20 border-t border-slate-800">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <p className="text-gray-400">
-              © {currentYear} My Blog. All rights reserved.
+            <p className="text-slate-500">
+              &copy; {currentYear} My Blog. All rights reserved.
             </p>
           </div>
 
@@ -18,26 +18,26 @@ export default function Footer() {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
+              className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors"
               aria-label="GitHub"
             >
-              <Github className="h-5 w-5" />
+              <Github className="h-5 w-5 text-slate-400" />
             </a>
             <a
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
+              className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors"
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5" />
+              <Linkedin className="h-5 w-5 text-slate-400" />
             </a>
             <a
               href="mailto:hello@example.com"
-              className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
+              className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors"
               aria-label="Email"
             >
-              <Mail className="h-5 w-5" />
+              <Mail className="h-5 w-5 text-slate-400" />
             </a>
           </div>
         </div>

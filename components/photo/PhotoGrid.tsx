@@ -35,7 +35,7 @@ export default function PhotoGrid({ photos }: PhotoGridProps) {
   if (photos.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500 text-lg">No photos found.</p>
+        <p className="text-slate-500 text-lg">No photos found.</p>
       </div>
     )
   }
@@ -56,7 +56,7 @@ export default function PhotoGrid({ photos }: PhotoGridProps) {
               />
             </div>
             {photo.description && (
-              <p className="text-sm text-gray-600 mt-2 text-center">
+              <p className="text-sm text-slate-400 mt-2 text-center">
                 {photo.description}
               </p>
             )}

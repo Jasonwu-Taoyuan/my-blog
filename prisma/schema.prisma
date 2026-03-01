@@ -62,3 +62,15 @@ model About {
   skills      String?
   updatedAt   DateTime @updatedAt
 }
+
+model MindMap {
+  id        String   @id @default(cuid())
+  title     String
+  bookTitle String?
+  bookId    String?
+  data      String   // JSON: mind-elixir NodeData
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([bookId])
+}

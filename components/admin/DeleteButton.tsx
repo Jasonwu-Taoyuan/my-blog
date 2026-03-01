@@ -42,7 +42,7 @@ export default function DeleteButton({ postId, postTitle }: DeleteButtonProps) {
     <button
       onClick={handleDelete}
       disabled={isDeleting}
-      className="text-red-600 hover:text-red-900 disabled:opacity-50"
+      className="text-red-400 hover:text-red-300 disabled:opacity-50"
       title="刪除文章"
     >
       <Trash2 className="h-5 w-5" />

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
+import { CATEGORIES } from '@/lib/categories'
 import 'easymde/dist/easymde.min.css'
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
@@ -98,33 +99,33 @@ export default function PostEditor({
   return (
     <form className="space-y-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-slate-300 mb-2">
           Title *
         </label>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           required
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-slate-300 mb-2">
           Summary *
         </label>
         <textarea
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
           rows={3}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           required
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-slate-300 mb-2">
           Cover Image
         </label>
         <input
@@ -132,7 +133,7 @@ export default function PostEditor({
           accept="image/*"
           onChange={handleImageUpload}
           disabled={isUploading}
-          className="w-full"
+          className="w-full text-slate-300"
         />
         {coverImageUrl && (
           <img
@@ -145,7 +146,7 @@ export default function PostEditor({
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-slate-300 mb-2">
             Tags (comma separated)
           </label>
           <input
@@ -153,36 +154,42 @@ export default function PostEditor({
             value={tags}
             onChange={(e) => setTags(e.target.value)}
             placeholder="nextjs, react, typescript"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Category
+          <label className="block text-sm font-medium text-slate-300 mb-2">
+            Category *
           </label>
-          <input
-            type="text"
+          <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            placeholder="Technology"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+            className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            required
+          >
+            <option value="">-- 選擇分類 --</option>
+            {CATEGORIES.map((cat) => (
+              <option key={cat.slug} value={cat.slug}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-slate-300 mb-2">
           Content * (Markdown)
         </label>
         <SimpleMDE value={content} onChange={setContent} />
       </div>
 
-      <div className="flex items-center justify-between pt-4 border-t">
+      <div className="flex items-center justify-between pt-4 border-t border-slate-700">
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+          className="px-4 py-2 text-slate-300 bg-slate-800 border border-slate-600 rounded-lg hover:bg-slate-700"
           disabled={isSaving}
         >
           Cancel
@@ -191,7 +198,7 @@ export default function PostEditor({
           <button
             type="button"
             onClick={(e) => handleSubmit(e, 'draft')}
-            className="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="px-4 py-2 text-slate-300 bg-slate-800 border border-slate-600 rounded-lg hover:bg-slate-700"
             disabled={isSaving}
           >
             {isSaving ? 'Saving...' : 'Save Draft'}
@@ -199,7 +206,7 @@ export default function PostEditor({
           <button
             type="button"
             onClick={(e) => handleSubmit(e, 'published')}
-            className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+            className="px-4 py-2 text-white bg-amber-600 rounded-lg hover:bg-amber-700"
             disabled={isSaving}
           >
             {isSaving ? 'Publishing...' : 'Publish'}

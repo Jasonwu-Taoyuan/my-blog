@@ -73,12 +73,12 @@ export default async function PostPage({ params }: Props) {
   ])
 
   return (
-    <article className="bg-white">
+    <article className="bg-slate-900">
       <div className="container mx-auto px-4 py-12 max-w-4xl">
         {/* Back Link */}
         <Link
           href="/posts"
-          className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6"
+          className="inline-flex items-center text-amber-500 hover:text-amber-400 mb-6"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Posts
@@ -98,12 +98,12 @@ export default async function PostPage({ params }: Props) {
         )}
 
         {/* Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold text-slate-100 mb-4">
           {post.title}
         </h1>
 
         {/* Meta Info */}
-        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-6 pb-6 border-b">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400 mb-6 pb-6 border-b border-slate-700">
           {post.publishedAt && (
             <div className="flex items-center">
               <Calendar className="h-4 w-4 mr-2" />
@@ -127,7 +127,7 @@ export default async function PostPage({ params }: Props) {
         )}
 
         {/* Summary */}
-        <div className="text-xl text-gray-600 mb-8 leading-relaxed">
+        <div className="text-xl text-slate-400 mb-8 leading-relaxed">
           {post.summary}
         </div>
 
@@ -138,23 +138,23 @@ export default async function PostPage({ params }: Props) {
 
         {/* Prev/Next Navigation */}
         {(prevPost || nextPost) && (
-          <div className="mt-12 pt-8 border-t grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="mt-12 pt-8 border-t border-slate-700 grid grid-cols-1 md:grid-cols-2 gap-4">
             {prevPost && (
               <Link
                 href={`/posts/${prevPost.slug}`}
-                className="p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+                className="p-4 border border-slate-700 rounded-lg hover:bg-slate-800 transition-colors"
               >
-                <div className="text-sm text-gray-500 mb-1">← Previous</div>
-                <div className="font-medium text-gray-900">{prevPost.title}</div>
+                <div className="text-sm text-slate-500 mb-1">&larr; Previous</div>
+                <div className="font-medium text-slate-200">{prevPost.title}</div>
               </Link>
             )}
             {nextPost && (
               <Link
                 href={`/posts/${nextPost.slug}`}
-                className="p-4 border rounded-lg hover:bg-gray-50 transition-colors md:text-right"
+                className="p-4 border border-slate-700 rounded-lg hover:bg-slate-800 transition-colors md:text-right"
               >
-                <div className="text-sm text-gray-500 mb-1">Next →</div>
-                <div className="font-medium text-gray-900">{nextPost.title}</div>
+                <div className="text-sm text-slate-500 mb-1">Next &rarr;</div>
+                <div className="font-medium text-slate-200">{nextPost.title}</div>
               </Link>
             )}
           </div>

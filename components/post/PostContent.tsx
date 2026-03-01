@@ -8,7 +8,7 @@ interface PostContentProps {
 
 export default function PostContent({ content }: PostContentProps) {
   return (
-    <div className="prose prose-lg max-w-none prose-headings:font-bold prose-a:text-blue-600 prose-img:rounded-lg">
+    <div className="prose prose-lg max-w-none prose-headings:font-bold">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
@@ -28,7 +28,7 @@ export default function PostContent({ content }: PostContentProps) {
               {...props}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-amber-500 hover:text-amber-400 hover:underline"
             />
           ),
         }}

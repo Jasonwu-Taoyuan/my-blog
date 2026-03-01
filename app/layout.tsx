@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'My Blog',
-  description: 'Sharing thoughts on technology, development, and life',
+  description: '分享關於逆齡大腦、商業與科技、歷史的閱讀筆記',
 }
 
 export default function RootLayout({
@@ -18,7 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-TW">
-      <body className={inter.className}>
+      <head>
+        <link rel="stylesheet" href="/mind-elixir.css" />
+      </head>
+      <body className={`${inter.className} bg-slate-900 text-slate-100`}>
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
