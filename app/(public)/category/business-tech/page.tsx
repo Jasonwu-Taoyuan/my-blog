@@ -1,4 +1,4 @@
-import { fetchBooks } from '@/lib/notion'
+import { fetchBooks, type Book } from '@/lib/notion'
 import BookList from './BookList'
 
 export const revalidate = 3600 // 每小時從 Notion 重新抓取
@@ -9,7 +9,7 @@ export const metadata = {
 }
 
 export default async function BusinessTechPage() {
-  let books = []
+  let books: Book[] = []
   let error = ''
 
   try {

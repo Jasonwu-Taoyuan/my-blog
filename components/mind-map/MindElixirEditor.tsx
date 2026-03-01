@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 
 interface Props {
-  initialData?: object
+  initialData?: any
   readOnly?: boolean
   editorRef?: React.MutableRefObject<any>
 }
@@ -23,7 +23,7 @@ export default function MindElixirEditor({ initialData, readOnly = false, editor
           id: 'root',
           topic: '中心主題',
           root: true,
-          children: [],
+          children: [] as any[],
         },
       }
 
@@ -34,7 +34,6 @@ export default function MindElixirEditor({ initialData, readOnly = false, editor
         editable: !readOnly,
         contextMenu: !readOnly,
         toolBar: !readOnly,
-        nodeMenu: !readOnly,
         keypress: !readOnly,
         theme: DARK_THEME,
       })
