@@ -1,7 +1,7 @@
 import { fetchBooks, type Book } from '@/lib/notion'
 import BookList from './BookList'
 
-export const revalidate = 3600 // 每小時從 Notion 重新抓取
+export const revalidate = 86400 // 每 24 小時從 Notion 重新抓取
 
 export const metadata = {
   title: '商業與科技書籍 | My Blog',
