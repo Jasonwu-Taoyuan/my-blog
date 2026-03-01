@@ -29,6 +29,12 @@ export default async function Header() {
             </Link>
           ))}
           <Link
+            href="/mind-maps"
+            className="text-slate-300 hover:text-amber-500 transition-colors font-medium"
+          >
+            思維導圖
+          </Link>
+          <Link
             href="/photos"
             className="text-slate-300 hover:text-amber-500 transition-colors font-medium"
           >
