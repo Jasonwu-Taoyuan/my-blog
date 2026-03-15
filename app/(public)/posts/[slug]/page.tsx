@@ -14,7 +14,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const post = await prisma.post.findUnique({
+  const post = await prisma.post.findFirst({
     where: { slug, status: 'published' },
   })
 
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params
-  const post = await prisma.post.findUnique({
+  const post = await prisma.post.findFirst({
     where: { slug, status: 'published' },
     include: {
       author: {
