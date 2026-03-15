@@ -18,7 +18,10 @@ export default function EditPostPage({ params }: Props) {
     fetch(`/api/posts/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setPost(data)
+        setPost({
+          ...data,
+          tags: typeof data.tags === 'string' ? JSON.parse(data.tags || '[]') : (data.tags || []),
+        })
         setLoading(false)
       })
   }, [id])
