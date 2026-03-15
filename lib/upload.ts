@@ -11,6 +11,9 @@ export async function saveImage(
 
   const uploadDir = join(process.cwd(), 'public', 'uploads', folder)
 
+  console.log('[upload] process.cwd():', process.cwd())
+  console.log('[upload] uploadDir:', uploadDir)
+
   if (!existsSync(uploadDir)) {
     await mkdir(uploadDir, { recursive: true })
   }
@@ -21,6 +24,8 @@ export async function saveImage(
   const filepath = join(uploadDir, filename)
 
   await writeFile(filepath, buffer)
+
+  console.log('[upload] saved to:', filepath)
 
   return `/uploads/${folder}/${filename}`
 }
