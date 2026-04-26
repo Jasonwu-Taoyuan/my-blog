@@ -6,45 +6,51 @@ export default async function Header() {
   const session = await auth()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-700/50 bg-slate-900/95 backdrop-blur supports-[backdrop-filter]:bg-slate-900/80">
-      <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold text-amber-500 tracking-wide">
-          My Blog
+    <header style={{
+      position: 'sticky',
+      top: 0,
+      zIndex: 50,
+      backgroundColor: 'var(--bg-sidebar)',
+      borderBottom: '1px solid var(--border-subtle)',
+      backdropFilter: 'blur(8px)',
+    }}>
+      <nav className="container mx-auto px-4" style={{ height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: 1100 }}>
+        {/* Logo */}
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{
+            width: 32, height: 32,
+            background: 'var(--accent-dim)',
+            border: '1px solid rgba(217,119,6,.4)',
+            borderRadius: 8,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 16,
+          }}>📖</div>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.25 }}>
+              Jason&apos;s Blog
+            </div>
+            <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 400 }}>
+              閱讀 · 思考 · 成長
+            </div>
+          </div>
         </Link>
 
-        <div className="flex items-center space-x-6">
-          <Link
-            href="/"
-            className="text-slate-300 hover:text-amber-500 transition-colors font-medium"
-          >
-            首頁
-          </Link>
+        {/* Navigation */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Link href="/" className="header-nav-item">首頁</Link>
           {CATEGORIES.map((cat) => (
             <Link
               key={cat.slug}
               href={`/category/${cat.slug}`}
-              className="text-slate-300 hover:text-amber-500 transition-colors font-medium"
+              className="header-nav-item"
             >
               {cat.name}
             </Link>
           ))}
-          <Link
-            href="/mind-maps"
-            className="text-slate-300 hover:text-amber-500 transition-colors font-medium"
-          >
-            思維導圖
-          </Link>
-          <Link
-            href="/photos"
-            className="text-slate-300 hover:text-amber-500 transition-colors font-medium"
-          >
-            相片
-          </Link>
+          <Link href="/mind-maps" className="header-nav-item">思維導圖</Link>
+          <Link href="/photos" className="header-nav-item">相片</Link>
           {session?.user && (
-            <Link
-              href="/admin"
-              className="px-4 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700 transition-colors"
-            >
+            <Link href="/admin" className="header-admin-btn" style={{ marginLeft: 8 }}>
               Admin
             </Link>
           )}
