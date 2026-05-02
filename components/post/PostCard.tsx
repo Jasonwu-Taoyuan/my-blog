@@ -18,29 +18,7 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <article
-      className="mg-fadeUp"
-      style={{
-        background: 'var(--bg-card)',
-        border: '1px solid var(--border-subtle)',
-        borderRadius: 'var(--radius)',
-        overflow: 'hidden',
-        transition: 'all var(--transition)',
-        position: 'relative',
-      }}
-      onMouseEnter={e => {
-        const el = e.currentTarget as HTMLElement
-        el.style.borderColor = 'var(--border)'
-        el.style.transform = 'translateY(-3px)'
-        el.style.boxShadow = '0 8px 24px rgba(0,0,0,.3)'
-      }}
-      onMouseLeave={e => {
-        const el = e.currentTarget as HTMLElement
-        el.style.borderColor = 'var(--border-subtle)'
-        el.style.transform = 'translateY(0)'
-        el.style.boxShadow = 'none'
-      }}
-    >
+    <article className="post-card mg-fadeUp">
       {/* Accent top strip */}
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0,
@@ -48,14 +26,13 @@ export default function PostCard({ post }: PostCardProps) {
       }} />
 
       {post.coverImageUrl && (
-        <Link href={`/posts/${post.slug}`}>
+        <Link href={`/posts/${post.slug}`} style={{ display: 'block' }}>
           <div className="relative h-44 w-full overflow-hidden">
             <Image
               src={post.coverImageUrl}
               alt={post.title}
               fill
               className="object-cover"
-              style={{ transition: 'transform 0.3s ease' }}
             />
           </div>
         </Link>
@@ -73,20 +50,8 @@ export default function PostCard({ post }: PostCardProps) {
           </div>
         </div>
 
-        <Link href={`/posts/${post.slug}`} style={{ textDecoration: 'none' }}>
-          <h3 style={{
-            fontSize: 15,
-            fontWeight: 700,
-            color: 'var(--text-primary)',
-            marginBottom: 8,
-            lineHeight: 1.4,
-            transition: 'color var(--transition)',
-          }}
-          onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent)'}
-          onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'}
-          >
-            {post.title}
-          </h3>
+        <Link href={`/posts/${post.slug}`} className="post-card-title">
+          {post.title}
         </Link>
 
         <p style={{
@@ -117,10 +82,7 @@ export default function PostCard({ post }: PostCardProps) {
                   fontWeight: 600,
                   textDecoration: 'none',
                   letterSpacing: '.02em',
-                  transition: 'opacity var(--transition)',
                 }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '0.75'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '1'}
               >
                 {tag}
               </Link>

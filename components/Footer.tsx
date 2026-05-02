@@ -1,11 +1,10 @@
-import { Github, Mail } from 'lucide-react'
+import { GitBranch, Mail } from 'lucide-react'
 
 export default function Footer() {
   return (
     <footer style={{
       borderTop: '1px solid var(--border-subtle)',
       backgroundColor: 'var(--bg-sidebar)',
-      marginTop: 'auto',
     }}>
       <div className="container mx-auto px-4 py-6" style={{ maxWidth: 1100 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
@@ -29,48 +28,14 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                width: 30, height: 30, borderRadius: 'var(--radius-sm)',
-                border: '1px solid var(--border)', color: 'var(--text-muted)',
-                transition: 'all var(--transition)',
-              }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.color = 'var(--accent)'
-                el.style.borderColor = 'rgba(217,119,6,.4)'
-                el.style.backgroundColor = 'var(--accent-dim)'
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.color = 'var(--text-muted)'
-                el.style.borderColor = 'var(--border)'
-                el.style.backgroundColor = 'transparent'
-              }}
+              className="footer-social-btn"
             >
-              <Github style={{ width: 14, height: 14 }} />
+              <GitBranch style={{ width: 14, height: 14 }} />
             </a>
             <a
               href="mailto:cm.wu2006@gmail.com"
               aria-label="Email"
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                width: 30, height: 30, borderRadius: 'var(--radius-sm)',
-                border: '1px solid var(--border)', color: 'var(--text-muted)',
-                transition: 'all var(--transition)',
-              }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.color = 'var(--accent)'
-                el.style.borderColor = 'rgba(217,119,6,.4)'
-                el.style.backgroundColor = 'var(--accent-dim)'
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.color = 'var(--text-muted)'
-                el.style.borderColor = 'var(--border)'
-                el.style.backgroundColor = 'transparent'
-              }}
+              className="footer-social-btn"
             >
               <Mail style={{ width: 14, height: 14 }} />
             </a>

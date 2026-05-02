@@ -172,6 +172,58 @@ body {
   letter-spacing: .04em;
 }
 
+/* ── Post card ──────────────────────────────────── */
+.post-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all var(--transition);
+  position: relative;
+  display: block;
+}
+
+.post-card:hover {
+  border-color: var(--border);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+
+.post-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.4;
+  transition: color var(--transition);
+  text-decoration: none;
+  display: block;
+}
+
+.post-card:hover .post-card-title {
+  color: var(--accent);
+}
+
+/* ── Footer social buttons ──────────────────────── */
+.footer-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.footer-social-btn:hover {
+  color: var(--accent);
+  border-color: rgba(217,119,6,.4);
+  background: var(--accent-dim);
+}
+
 /* ── Header nav items ───────────────────────────── */
 .header-nav-item {
   display: inline-flex;
