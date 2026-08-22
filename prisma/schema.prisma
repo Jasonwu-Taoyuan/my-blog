@@ -74,3 +74,18 @@ model MindMap {
 
   @@index([bookId])
 }
+
+model Trip {
+  id            String    @id @default(cuid())
+  placeName     String
+  country       String?
+  lat           Float
+  lng           Float
+  visitedAt     DateTime?
+  note          String?
+  coverImageUrl String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([country])
+}

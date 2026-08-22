@@ -1,8 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { fetchBookById, fetchBookBlocks } from '@/lib/notion'
-import { prisma } from '@/lib/prisma'
-import { GitBranch } from 'lucide-react'
 
 export const revalidate = 3600
 
@@ -15,20 +13,16 @@ export async function generateMetadata({ params }: Props) {
   const book = await fetchBookById(id)
   if (!book) return { title: 'Not Found' }
   return {
-    title: `${book.title} | 商業與科技書籍`,
+    title: `${book.title} | 知識管理`,
     description: `${book.mainCategory} · ${book.subCategory}`,
   }
 }
 
 export default async function BookDetailPage({ params }: Props) {
   const { id } = await params
-  const [book, blocks, mindMap] = await Promise.all([
+  const [book, blocks] = await Promise.all([
     fetchBookById(id),
     fetchBookBlocks(id),
-    prisma.mindMap.findFirst({
-      where: { bookId: id },
-      select: { id: true, title: true },
-    }),
   ])
 
   if (!book) notFound()
@@ -37,10 +31,10 @@ export default async function BookDetailPage({ params }: Props) {
     <div className="container mx-auto px-4 py-12 max-w-3xl">
       {/* 返回 */}
       <Link
-        href="/category/business-tech"
+        href="/knowledge"
         className="inline-flex items-center gap-2 text-slate-400 hover:text-amber-400 transition-colors mb-8 text-sm"
       >
-        ← 返回書單
+        ← 返回知識管理
       </Link>
 
       {/* 書籍資訊 */}
@@ -77,19 +71,6 @@ export default async function BookDetailPage({ params }: Props) {
           {book.callNumber && <span>索書號：{book.callNumber}</span>}
         </div>
       </div>
-
-      {/* 思維導圖連結 */}
-      {mindMap && (
-        <div className="mb-6">
-          <Link
-            href={`/mind-maps/${mindMap.id}`}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-lg hover:bg-amber-500/20 transition-colors text-sm font-medium"
-          >
-            <GitBranch className="h-4 w-4" />
-            查看思維導圖：{mindMap.title}
-          </Link>
-        </div>
-      )}
 
       {/* 分隔線 */}
       <hr className="border-slate-700 mb-8" />

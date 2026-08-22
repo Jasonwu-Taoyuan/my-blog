@@ -81,7 +81,7 @@ export default function BookList({ books, categories }: Props) {
           {filtered.map((book) => (
             <Link
               key={book.id}
-              href={`/category/business-tech/${book.id}`}
+              href={`/knowledge/${book.id}`}
               className="block bg-slate-800/60 border border-slate-700 rounded-xl p-5 hover:border-amber-500/50 hover:bg-slate-800 transition-colors group"
             >
               {/* 編號 + 書名 */}

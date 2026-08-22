@@ -1,6 +1,15 @@
 import Link from 'next/link'
 import { auth } from '@/auth'
-import { CATEGORIES } from '@/lib/categories'
+
+const NAV_ITEMS = [
+  { href: '/', label: '首頁' },
+  { href: '/about', label: '關於我' },
+  { href: '/category/operations', label: '專業知識' },
+  { href: '/knowledge', label: '知識管理' },
+  { href: '/travel', label: '旅遊地圖' },
+  { href: '/category/sports', label: '運動' },
+  { href: '/photos', label: '相片' },
+]
 
 export default async function Header() {
   const session = await auth()
@@ -37,18 +46,11 @@ export default async function Header() {
 
         {/* Navigation */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Link href="/" className="header-nav-item">首頁</Link>
-          {CATEGORIES.map((cat) => (
-            <Link
-              key={cat.slug}
-              href={`/category/${cat.slug}`}
-              className="header-nav-item"
-            >
-              {cat.name}
+          {NAV_ITEMS.map((item) => (
+            <Link key={item.href} href={item.href} className="header-nav-item">
+              {item.label}
             </Link>
           ))}
-          <Link href="/mind-maps" className="header-nav-item">思維導圖</Link>
-          <Link href="/photos" className="header-nav-item">相片</Link>
           {session?.user && (
             <Link href="/admin" className="header-admin-btn" style={{ marginLeft: 8 }}>
               Admin

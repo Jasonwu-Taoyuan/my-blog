@@ -6,36 +6,36 @@ import ReactMarkdown from 'react-markdown'
 
 export const metadata = {
   title: 'Home | My Blog',
-  description: '分享關於逆齡大腦、商業與科技、歷史的閱讀筆記',
+  description: '專業知識、知識管理、旅遊足跡與運動觀察',
 }
 
 const CATEGORY_META = [
   {
-    slug: 'anti-aging',
-    name: '逆齡大腦',
-    desc: '探索大腦健康與神經可塑性，從科學角度實踐逆齡',
-    emoji: '🧠',
+    slug: 'category/operations',
+    name: '專業知識',
+    desc: '營運管理的實務心得與方法論',
+    emoji: '📊',
     color: 'var(--accent)',
     bg: 'var(--accent-dim)',
   },
   {
-    slug: 'business-tech',
-    name: '商業與科技',
-    desc: '商業思維與科技趨勢的閱讀筆記，連結知識與實務',
+    slug: 'knowledge',
+    name: '知識管理',
+    desc: '讀書筆記、歷史與跨領域思考的整理',
     emoji: '📚',
     color: 'var(--emerald)',
     bg: 'rgba(16,185,129,.12)',
   },
   {
-    slug: 'history',
-    name: '歷史',
-    desc: '從歷史事件與人物汲取智慧，理解現在、洞見未來',
-    emoji: '🏛️',
+    slug: 'travel',
+    name: '旅遊地圖',
+    desc: '去過的地方，一個一個標記下來',
+    emoji: '🗺️',
     color: 'var(--purple)',
     bg: 'rgba(139,92,246,.12)',
   },
   {
-    slug: 'sports',
+    slug: 'category/sports',
     name: '運動',
     desc: 'NBA 馬刺與運動世界的深度觀察與分析',
     emoji: '🏀',
@@ -101,15 +101,15 @@ export default async function Home() {
             fontSize: 14, color: 'var(--text-secondary)',
             maxWidth: 480, lineHeight: 1.65, margin: 0,
           }}>
-            紀錄逆齡大腦、商業科技、歷史與運動的閱讀心得，把知識內化為行動力。
+            紀錄營運管理的專業心得、讀書筆記、旅遊足跡與運動觀察，把知識內化為行動力。
           </p>
 
           <div style={{ display: 'flex', gap: 10, marginTop: 22, flexWrap: 'wrap' }}>
             <Link href="/posts" className="mg-btn mg-btn-primary">
               <BookOpen size={14} /> 所有文章
             </Link>
-            <Link href="/mind-maps" className="mg-btn mg-btn-ghost">
-              <Map size={14} /> 思維導圖
+            <Link href="/travel" className="mg-btn mg-btn-ghost">
+              <Map size={14} /> 旅遊地圖
             </Link>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default async function Home() {
           {CATEGORY_META.map(({ slug, name, desc, emoji, color, bg }) => (
             <Link
               key={slug}
-              href={`/category/${slug}`}
+              href={`/${slug}`}
               className="mod-card"
               style={{ '--card-color': color } as React.CSSProperties}
             >
