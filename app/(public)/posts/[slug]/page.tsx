@@ -73,20 +73,20 @@ export default async function PostPage({ params }: Props) {
   ])
 
   return (
-    <article className="bg-slate-900">
-      <div className="container mx-auto px-4 py-12 max-w-4xl">
+    <article>
+      <div className="container mx-auto px-4 py-12 max-w-2xl">
         {/* Back Link */}
         <Link
           href="/posts"
-          className="inline-flex items-center text-amber-500 hover:text-amber-400 mb-6"
+          className="inline-flex items-center text-sm font-semibold text-neutral-500 hover:text-neutral-900 mb-7"
         >
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Posts
+          <ArrowLeft className="h-4 w-4 mr-1.5" />
+          返回文章列表
         </Link>
 
         {/* Cover Image */}
         {post.coverImageUrl && (
-          <div className="relative w-full h-96 mb-8 rounded-lg overflow-hidden">
+          <div className="relative w-full h-96 mb-8 rounded-2xl overflow-hidden">
             <Image
               src={post.coverImageUrl}
               alt={post.title}
@@ -97,64 +97,57 @@ export default async function PostPage({ params }: Props) {
           </div>
         )}
 
-        {/* Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-slate-100 mb-4">
-          {post.title}
-        </h1>
-
-        {/* Meta Info */}
-        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400 mb-6 pb-6 border-b border-slate-700">
-          {post.publishedAt && (
-            <div className="flex items-center">
-              <Calendar className="h-4 w-4 mr-2" />
-              <time>{formatDate(post.publishedAt)}</time>
-            </div>
-          )}
-          <div className="flex items-center">
-            <Clock className="h-4 w-4 mr-2" />
-            {post.readingTimeMinutes} min read
-          </div>
-          {post.author && <div>By {post.author.name}</div>}
-        </div>
-
         {/* Tags */}
         {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-8">
+          <div className="flex flex-wrap gap-2 mb-4">
             {tags.map((tag: string) => (
               <TagChip key={tag} tag={tag} href={`/posts?tag=${tag}`} />
             ))}
           </div>
         )}
 
-        {/* Summary */}
-        <div className="text-xl text-slate-400 mb-8 leading-relaxed">
-          {post.summary}
+        {/* Title */}
+        <h1 className="text-[34px] font-bold tracking-tight text-neutral-900 leading-tight mb-4">
+          {post.title}
+        </h1>
+
+        {/* Meta Info */}
+        <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-400 mb-9">
+          {post.publishedAt && (
+            <div className="flex items-center gap-1.5">
+              <Calendar className="h-3.5 w-3.5" />
+              <time>{formatDate(post.publishedAt)}</time>
+            </div>
+          )}
+          <div className="flex items-center gap-1.5">
+            <Clock className="h-3.5 w-3.5" />
+            {post.readingTimeMinutes} 分鐘閱讀
+          </div>
+          {post.author && <div>{post.author.name}</div>}
         </div>
 
         {/* Content */}
-        <div className="prose-content">
-          <PostContent content={post.content} />
-        </div>
+        <PostContent content={post.content} />
 
         {/* Prev/Next Navigation */}
         {(prevPost || nextPost) && (
-          <div className="mt-12 pt-8 border-t border-slate-700 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="mt-14 pt-8 border-t border-neutral-200/70 grid grid-cols-1 md:grid-cols-2 gap-4">
             {prevPost && (
               <Link
                 href={`/posts/${prevPost.slug}`}
-                className="p-4 border border-slate-700 rounded-lg hover:bg-slate-800 transition-colors"
+                className="p-4 bg-white border border-neutral-200/70 rounded-xl shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="text-sm text-slate-500 mb-1">&larr; Previous</div>
-                <div className="font-medium text-slate-200">{prevPost.title}</div>
+                <div className="text-xs text-neutral-400 mb-1">← 上一篇</div>
+                <div className="font-medium text-neutral-900">{prevPost.title}</div>
               </Link>
             )}
             {nextPost && (
               <Link
                 href={`/posts/${nextPost.slug}`}
-                className="p-4 border border-slate-700 rounded-lg hover:bg-slate-800 transition-colors md:text-right"
+                className="p-4 bg-white border border-neutral-200/70 rounded-xl shadow-sm hover:shadow-md transition-shadow md:text-right"
               >
-                <div className="text-sm text-slate-500 mb-1">Next &rarr;</div>
-                <div className="font-medium text-slate-200">{nextPost.title}</div>
+                <div className="text-xs text-neutral-400 mb-1">下一篇 →</div>
+                <div className="font-medium text-neutral-900">{nextPost.title}</div>
               </Link>
             )}
           </div>

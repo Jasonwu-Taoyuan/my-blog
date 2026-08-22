@@ -28,7 +28,7 @@ export default function PostContent({ content }: PostContentProps) {
               {...props}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-amber-500 hover:text-amber-400 hover:underline"
+              className="text-[var(--accent)] hover:underline"
             />
           ),
         }}

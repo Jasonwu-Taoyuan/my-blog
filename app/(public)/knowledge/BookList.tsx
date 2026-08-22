@@ -44,7 +44,7 @@ export default function BookList({ books, categories }: Props) {
           placeholder="搜尋書名、分類..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full md:w-96 bg-slate-800 border border-slate-600 rounded-lg px-4 py-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
+          className="w-full md:w-96 bg-white border border-neutral-200 rounded-xl px-4 py-2 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30 focus:border-[var(--accent)] transition-colors"
         />
       </div>
 
@@ -56,8 +56,8 @@ export default function BookList({ books, categories }: Props) {
             onClick={() => setActiveCategory(cat)}
             className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
               activeCategory === cat
-                ? 'bg-amber-500 text-slate-900'
-                : 'bg-slate-800 text-slate-400 hover:text-slate-100 hover:bg-slate-700'
+                ? 'bg-[var(--accent)] text-white'
+                : 'bg-neutral-100 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200'
             }`}
           >
             {cat}
@@ -69,29 +69,29 @@ export default function BookList({ books, categories }: Props) {
       </div>
 
       {/* 結果數量 */}
-      <p className="text-sm text-slate-500 mb-4">
+      <p className="text-sm text-neutral-400 mb-4">
         顯示 {filtered.length} / {books.length} 本
       </p>
 
       {/* 書籍列表 */}
       {filtered.length === 0 ? (
-        <p className="text-slate-500 text-center py-12">找不到符合的書籍</p>
+        <p className="text-neutral-400 text-center py-12">找不到符合的書籍</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((book) => (
             <Link
               key={book.id}
               href={`/knowledge/${book.id}`}
-              className="block bg-slate-800/60 border border-slate-700 rounded-xl p-5 hover:border-amber-500/50 hover:bg-slate-800 transition-colors group"
+              className="block bg-white border border-neutral-200/70 rounded-2xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
             >
               {/* 編號 + 書名 */}
               <div className="flex items-start gap-3 mb-3">
                 {book.number && (
-                  <span className="text-xs text-slate-500 mt-1 shrink-0">
+                  <span className="text-xs text-neutral-400 mt-1 shrink-0">
                     #{book.number}
                   </span>
                 )}
-                <h3 className="text-slate-100 font-medium text-base leading-snug group-hover:text-amber-400 transition-colors">
+                <h3 className="text-neutral-900 font-semibold text-base leading-snug group-hover:text-[var(--accent)] transition-colors">
                   {book.title}
                 </h3>
               </div>
@@ -99,12 +99,12 @@ export default function BookList({ books, categories }: Props) {
               {/* 標籤 */}
               <div className="flex flex-wrap gap-2">
                 {book.mainCategory && (
-                  <span className="text-xs bg-amber-500/15 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded-full">
+                  <span className="text-xs bg-[var(--accent)]/10 text-[var(--accent)] px-2 py-0.5 rounded-full">
                     {book.mainCategory}
                   </span>
                 )}
                 {book.subCategory && (
-                  <span className="text-xs bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full">
+                  <span className="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5 rounded-full">
                     {book.subCategory}
                   </span>
                 )}
@@ -113,7 +113,7 @@ export default function BookList({ books, categories }: Props) {
               {/* 借閱日期 + 閱讀提示 */}
               <div className="flex items-center justify-between mt-3">
                 {book.borrowDate ? (
-                  <p className="text-xs text-slate-600">
+                  <p className="text-xs text-neutral-400">
                     借閱：
                     {new Date(book.borrowDate).toLocaleDateString('zh-TW', {
                       year: 'numeric',
@@ -122,7 +122,7 @@ export default function BookList({ books, categories }: Props) {
                     })}
                   </p>
                 ) : <span />}
-                <span className="text-xs text-slate-600 group-hover:text-amber-500 transition-colors">
+                <span className="text-xs text-neutral-400 group-hover:text-[var(--accent)] transition-colors">
                   查看摘要 →
                 </span>
               </div>

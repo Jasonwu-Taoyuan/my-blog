@@ -17,7 +17,7 @@ export default function PostList({ posts }: PostListProps) {
   if (posts.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-slate-500 text-lg">No posts found.</p>
+        <p className="text-neutral-400 text-lg">尚無文章</p>
       </div>
     )
   }

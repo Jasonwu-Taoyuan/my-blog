@@ -63,8 +63,8 @@ export default async function PostsPage({ searchParams }: Props) {
   const totalPages = Math.ceil(total / limit)
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-slate-100 mb-8">All Posts</h1>
+    <div className="container mx-auto px-4 py-12" style={{ maxWidth: 1100 }}>
+      <h1 className="text-4xl font-bold text-neutral-900 tracking-tight mb-8">所有文章</h1>
 
       {/* Search Bar */}
       <div className="mb-8 max-w-md">
@@ -74,12 +74,12 @@ export default async function PostsPage({ searchParams }: Props) {
       {/* Tags Filter */}
       {allTags.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-sm font-semibold text-slate-400 mb-3">Filter by tag:</h2>
+          <h2 className="text-sm font-semibold text-neutral-400 mb-3">依標籤篩選：</h2>
           <div className="flex flex-wrap gap-2">
             {tag && (
               <a href="/posts" className="inline-block">
-                <span className="px-3 py-1 text-xs font-medium rounded-full bg-slate-600 text-slate-200 hover:bg-slate-500">
-                  Clear filter &times;
+                <span className="px-3 py-1 text-xs font-medium rounded-full bg-neutral-200 text-neutral-700 hover:bg-neutral-300">
+                  清除篩選 &times;
                 </span>
               </a>
             )}
@@ -98,11 +98,11 @@ export default async function PostsPage({ searchParams }: Props) {
       {/* Active Filters */}
       {(tag || query) && (
         <div className="mb-6">
-          <p className="text-sm text-slate-400">
-            {tag && <span>Tag: <strong className="text-slate-200">{tag}</strong></span>}
-            {tag && query && ' \u2022 '}
-            {query && <span>Search: <strong className="text-slate-200">{query}</strong></span>}
-            {' '}({total} {total === 1 ? 'result' : 'results'})
+          <p className="text-sm text-neutral-400">
+            {tag && <span>標籤：<strong className="text-neutral-700">{tag}</strong></span>}
+            {tag && query && ' • '}
+            {query && <span>搜尋：<strong className="text-neutral-700">{query}</strong></span>}
+            {' '}（共 {total} 筆結果）
           </p>
         </div>
       )}

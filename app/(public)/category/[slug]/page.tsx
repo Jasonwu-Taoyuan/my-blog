@@ -58,10 +58,10 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   const totalPages = Math.ceil(total / limit)
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12" style={{ maxWidth: 1100 }}>
       <div className="mb-10">
-        <h1 className="text-4xl font-bold text-slate-100 mb-3">{category.name}</h1>
-        <p className="text-lg text-slate-400">{category.description}</p>
+        <h1 className="text-4xl font-bold text-neutral-900 tracking-tight mb-3">{category.name}</h1>
+        <p className="text-lg text-neutral-500">{category.description}</p>
       </div>
 
       <PostList posts={formattedPosts} />

@@ -20,8 +20,8 @@ export default async function PhotosPage() {
   }))
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-slate-100 mb-8">相片</h1>
+    <div className="container mx-auto px-4 py-12" style={{ maxWidth: 1100 }}>
+      <h1 className="text-4xl font-bold text-neutral-900 tracking-tight mb-8">相片</h1>
       <PhotoGrid photos={serializedPhotos} />
     </div>
   )

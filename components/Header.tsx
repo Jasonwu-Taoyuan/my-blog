@@ -20,20 +20,21 @@ export default async function Header() {
       top: 0,
       zIndex: 50,
       backgroundColor: 'var(--bg-sidebar)',
-      borderBottom: '1px solid var(--border-subtle)',
-      backdropFilter: 'blur(8px)',
+      borderBottom: '.5px solid var(--border-subtle)',
+      backdropFilter: 'blur(20px) saturate(180%)',
+      WebkitBackdropFilter: 'blur(20px) saturate(180%)',
     }}>
       <nav className="container mx-auto px-4" style={{ height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: 1100 }}>
         {/* Logo */}
         <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{
-            width: 32, height: 32,
-            background: 'var(--accent-dim)',
-            border: '1px solid rgba(217,119,6,.4)',
+            width: 30, height: 30,
+            background: 'linear-gradient(160deg, #0071e3, #0058b0)',
             borderRadius: 8,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 16,
-          }}>📖</div>
+            fontSize: 14, fontWeight: 700, color: '#fff',
+            flexShrink: 0,
+          }}>J</div>
           <div>
             <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.25 }}>
               Jason&apos;s Blog

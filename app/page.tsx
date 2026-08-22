@@ -14,33 +14,37 @@ const CATEGORY_META = [
     slug: 'category/operations',
     name: '專業知識',
     desc: '營運管理的實務心得與方法論',
-    emoji: '📊',
     color: 'var(--accent)',
-    bg: 'var(--accent-dim)',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20V10M12 20V4M20 20v-6" /></svg>
+    ),
   },
   {
     slug: 'knowledge',
     name: '知識管理',
     desc: '讀書筆記、歷史與跨領域思考的整理',
-    emoji: '📚',
     color: 'var(--emerald)',
-    bg: 'rgba(16,185,129,.12)',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M4 5.5C4 4.67 4.67 4 5.5 4H12v16H5.5A1.5 1.5 0 0 1 4 18.5V5.5Z" /><path d="M20 5.5c0-.83-.67-1.5-1.5-1.5H12v16h6.5a1.5 1.5 0 0 0 1.5-1.5V5.5Z" /></svg>
+    ),
   },
   {
     slug: 'travel',
     name: '旅遊地圖',
     desc: '去過的地方，一個一個標記下來',
-    emoji: '🗺️',
     color: 'var(--purple)',
-    bg: 'rgba(139,92,246,.12)',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z" /><circle cx="12" cy="9.5" r="2.5" /></svg>
+    ),
   },
   {
     slug: 'category/sports',
     name: '運動',
     desc: 'NBA 馬刺與運動世界的深度觀察與分析',
-    emoji: '🏀',
     color: 'var(--sky)',
-    bg: 'rgba(56,189,248,.12)',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"><circle cx="12" cy="12" r="8.5" /><path d="M4 12h16M12 3.5v17M6.3 6.3c2.8 2.8 2.8 8.6 0 11.4M17.7 6.3c-2.8 2.8-2.8 8.6 0 11.4" /></svg>
+    ),
   },
 ]
 
@@ -64,47 +68,21 @@ export default async function Home() {
       <div className="container mx-auto px-4" style={{ maxWidth: 1100 }}>
 
         {/* ── Hero ─────────────────────────────────────── */}
-        <div
-          className="mg-fadeUp"
-          style={{
-            background: 'linear-gradient(135deg, rgba(217,119,6,.12), rgba(13,17,23,.8))',
-            border: '1px solid rgba(217,119,6,.2)',
-            borderRadius: 'var(--radius-lg)',
-            padding: '32px 36px',
-            marginBottom: 36,
-            position: 'relative',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Decorative background text */}
-          <div style={{
-            position: 'absolute', right: 32, top: '50%', transform: 'translateY(-50%)',
-            fontSize: 88, opacity: .07, pointerEvents: 'none', lineHeight: 1,
-          }}>📖</div>
-
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: 5,
-            background: 'var(--accent-dim)', color: 'var(--accent)',
-            fontSize: 11, fontWeight: 700, padding: '3px 10px',
-            borderRadius: 99, letterSpacing: '.04em', marginBottom: 14,
-          }}>
-            ✨ 閱讀筆記 · 知識整理
-          </div>
-
+        <div className="mg-fadeUp" style={{ textAlign: 'center', padding: '48px 0 56px' }}>
           <h1 style={{
-            fontSize: 26, fontWeight: 800, color: 'var(--text-primary)',
-            marginBottom: 8, lineHeight: 1.3,
+            fontSize: 40, fontWeight: 700, letterSpacing: '-.02em', lineHeight: 1.15,
+            color: 'var(--text-primary)', margin: '0 0 16px',
           }}>
-            Jason&apos;s Blog
+            把知識，<br />化為行動力。
           </h1>
           <p style={{
-            fontSize: 14, color: 'var(--text-secondary)',
-            maxWidth: 480, lineHeight: 1.65, margin: 0,
+            fontSize: 16, color: 'var(--text-secondary)',
+            maxWidth: 460, lineHeight: 1.6, margin: '0 auto',
           }}>
             紀錄營運管理的專業心得、讀書筆記、旅遊足跡與運動觀察，把知識內化為行動力。
           </p>
 
-          <div style={{ display: 'flex', gap: 10, marginTop: 22, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 10, marginTop: 26, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/posts" className="mg-btn mg-btn-primary">
               <BookOpen size={14} /> 所有文章
             </Link>
@@ -128,25 +106,25 @@ export default async function Home() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
             gap: 14,
-            marginBottom: 36,
+            marginBottom: 40,
           }}
         >
-          {CATEGORY_META.map(({ slug, name, desc, emoji, color, bg }) => (
+          {CATEGORY_META.map(({ slug, name, desc, color, icon }) => (
             <Link
               key={slug}
               href={`/${slug}`}
               className="mod-card"
               style={{ '--card-color': color } as React.CSSProperties}
             >
-              <div className="mod-icon" style={{ background: bg }}>{emoji}</div>
-              <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 4px' }}>
+              <div className="mod-icon" style={{ background: color }}>{icon}</div>
+              <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 4px', letterSpacing: '-.01em' }}>
                 {name}
               </p>
-              <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>
+              <p style={{ fontSize: 12.5, color: 'var(--text-secondary)', lineHeight: 1.55, margin: 0 }}>
                 {desc}
               </p>
               <div style={{
-                marginTop: 12, fontSize: 11, color, fontWeight: 600,
+                marginTop: 14, fontSize: 11, color, fontWeight: 600,
                 display: 'flex', alignItems: 'center', gap: 4,
               }}>
                 進入分類 <ArrowRight size={11} />
@@ -168,18 +146,14 @@ export default async function Home() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
             gap: 16,
-            marginBottom: 36,
+            marginBottom: 40,
           }}>
             {formattedPosts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
           </div>
         ) : (
-          <div style={{
-            padding: '48px 20px', textAlign: 'center',
-            background: 'var(--bg-card)', border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius)', marginBottom: 36,
-          }}>
+          <div className="mg-card" style={{ padding: '48px 20px', textAlign: 'center', marginBottom: 40 }}>
             <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>
               尚未有文章，敬請期待！
             </p>
@@ -192,7 +166,7 @@ export default async function Home() {
             className="mg-card mg-fadeUp"
             style={{ animationDelay: '.18s', textAlign: 'center' }}
           >
-            <h2 style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 4 }}>
+            <h2 style={{ fontSize: 20, fontWeight: 700, letterSpacing: '-.01em', color: 'var(--text-primary)', marginBottom: 4 }}>
               {about.displayName}
             </h2>
             {about.headline && (

@@ -34,9 +34,9 @@ export default async function SportsPage({ searchParams }: Props) {
   }))
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12" style={{ maxWidth: 1100 }}>
       {/* 馬刺主題 Header */}
-      <div className="mb-10 rounded-2xl overflow-hidden border border-slate-700">
+      <div className="mb-10 rounded-2xl overflow-hidden shadow-sm">
         <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-8 relative">
           {/* 背景裝飾 */}
           <div className="absolute inset-0 opacity-5" style={{
@@ -80,8 +80,8 @@ export default async function SportsPage({ searchParams }: Props) {
       {/* 文章列表 */}
       {formattedPosts.length === 0 ? (
         <div className="text-center py-20">
-          <p className="text-slate-500 text-lg mb-2">尚無文章</p>
-          <p className="text-slate-600 text-sm">在後台新增分類為「運動」的文章即可顯示於此</p>
+          <p className="text-neutral-400 text-lg mb-2">尚無文章</p>
+          <p className="text-neutral-300 text-sm">在後台新增分類為「運動」的文章即可顯示於此</p>
         </div>
       ) : (
         <>

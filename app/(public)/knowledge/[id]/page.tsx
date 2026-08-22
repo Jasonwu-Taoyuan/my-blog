@@ -32,7 +32,7 @@ export default async function BookDetailPage({ params }: Props) {
       {/* 返回 */}
       <Link
         href="/knowledge"
-        className="inline-flex items-center gap-2 text-slate-400 hover:text-amber-400 transition-colors mb-8 text-sm"
+        className="inline-flex items-center gap-2 text-neutral-400 hover:text-[var(--accent)] transition-colors mb-8 text-sm"
       >
         ← 返回知識管理
       </Link>
@@ -40,24 +40,24 @@ export default async function BookDetailPage({ params }: Props) {
       {/* 書籍資訊 */}
       <div className="mb-10">
         {book.number && (
-          <p className="text-slate-500 text-sm mb-2">#{book.number}</p>
+          <p className="text-neutral-400 text-sm mb-2">#{book.number}</p>
         )}
-        <h1 className="text-3xl font-bold text-slate-100 mb-4 leading-snug">
+        <h1 className="text-3xl font-bold text-neutral-900 tracking-tight mb-4 leading-snug">
           {book.title}
         </h1>
         <div className="flex flex-wrap gap-2 mb-4">
           {book.mainCategory && (
-            <span className="text-sm bg-amber-500/15 text-amber-400 border border-amber-500/30 px-3 py-1 rounded-full">
+            <span className="text-sm bg-[var(--accent)]/10 text-[var(--accent)] px-3 py-1 rounded-full">
               {book.mainCategory}
             </span>
           )}
           {book.subCategory && (
-            <span className="text-sm bg-slate-700 text-slate-300 px-3 py-1 rounded-full">
+            <span className="text-sm bg-neutral-100 text-neutral-500 px-3 py-1 rounded-full">
               {book.subCategory}
             </span>
           )}
         </div>
-        <div className="flex flex-wrap gap-4 text-sm text-slate-500">
+        <div className="flex flex-wrap gap-4 text-sm text-neutral-400">
           {book.borrowDate && (
             <span>
               借閱日期：
@@ -73,11 +73,11 @@ export default async function BookDetailPage({ params }: Props) {
       </div>
 
       {/* 分隔線 */}
-      <hr className="border-slate-700 mb-8" />
+      <hr className="border-neutral-200 mb-8" />
 
       {/* Notion 內容 */}
       {blocks.length === 0 ? (
-        <p className="text-slate-500">尚無摘要內容</p>
+        <p className="text-neutral-400">尚無摘要內容</p>
       ) : (
         <div className="space-y-4">
           {blocks.map((block) => {
@@ -86,37 +86,37 @@ export default async function BookDetailPage({ params }: Props) {
             switch (block.type) {
               case 'heading_1':
                 return (
-                  <h1 key={block.id} className="text-2xl font-bold text-slate-100 mt-8 mb-2">
+                  <h1 key={block.id} className="text-2xl font-bold text-neutral-900 mt-8 mb-2">
                     {block.content}
                   </h1>
                 )
               case 'heading_2':
                 return (
-                  <h2 key={block.id} className="text-xl font-semibold text-amber-400 mt-6 mb-2">
+                  <h2 key={block.id} className="text-xl font-semibold mt-6 mb-2" style={{ color: 'var(--accent)' }}>
                     {block.content}
                   </h2>
                 )
               case 'heading_3':
                 return (
-                  <h3 key={block.id} className="text-lg font-semibold text-slate-200 mt-4 mb-1">
+                  <h3 key={block.id} className="text-lg font-semibold text-neutral-800 mt-4 mb-1">
                     {block.content}
                   </h3>
                 )
               case 'paragraph':
                 return (
-                  <p key={block.id} className="text-slate-300 leading-relaxed">
+                  <p key={block.id} className="text-neutral-600 leading-relaxed">
                     {block.content}
                   </p>
                 )
               case 'bulleted_list_item':
                 return (
-                  <li key={block.id} className="text-slate-300 leading-relaxed ml-4 list-disc">
+                  <li key={block.id} className="text-neutral-600 leading-relaxed ml-4 list-disc">
                     {block.content}
                   </li>
                 )
               case 'numbered_list_item':
                 return (
-                  <li key={block.id} className="text-slate-300 leading-relaxed ml-4 list-decimal">
+                  <li key={block.id} className="text-neutral-600 leading-relaxed ml-4 list-decimal">
                     {block.content}
                   </li>
                 )
@@ -124,25 +124,26 @@ export default async function BookDetailPage({ params }: Props) {
                 return (
                   <blockquote
                     key={block.id}
-                    className="border-l-4 border-amber-500 pl-4 text-slate-400 italic"
+                    className="border-l-[3px] pl-4 text-neutral-500 italic"
+                    style={{ borderColor: 'var(--accent)' }}
                   >
                     {block.content}
                   </blockquote>
                 )
               case 'divider':
-                return <hr key={block.id} className="border-slate-700" />
+                return <hr key={block.id} className="border-neutral-200" />
               case 'code':
                 return (
                   <pre
                     key={block.id}
-                    className="bg-slate-900 border border-slate-700 rounded-lg p-4 text-sm text-slate-300 overflow-x-auto"
+                    className="bg-neutral-900 text-neutral-100 rounded-xl p-4 text-sm overflow-x-auto"
                   >
                     <code>{block.content}</code>
                   </pre>
                 )
               default:
                 return block.content ? (
-                  <p key={block.id} className="text-slate-300 leading-relaxed">
+                  <p key={block.id} className="text-neutral-600 leading-relaxed">
                     {block.content}
                   </p>
                 ) : null

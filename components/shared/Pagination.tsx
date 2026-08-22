@@ -30,10 +30,10 @@ export default function Pagination({
       {currentPage > 1 && (
         <Link
           href={createPageUrl(currentPage - 1)}
-          className="inline-flex items-center px-3 py-2 border border-slate-600 rounded-md text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700"
+          className="inline-flex items-center px-3 py-2 border border-neutral-200 rounded-lg text-sm font-medium text-neutral-600 bg-white hover:bg-neutral-50"
         >
           <ChevronLeft className="h-4 w-4 mr-1" />
-          Previous
+          上一頁
         </Link>
       )}
 
@@ -48,10 +48,10 @@ export default function Pagination({
               <Link
                 key={page}
                 href={createPageUrl(page)}
-                className={`px-4 py-2 border rounded-md text-sm font-medium ${
+                className={`px-4 py-2 border rounded-lg text-sm font-medium ${
                   page === currentPage
-                    ? 'bg-amber-600 text-white border-amber-600'
-                    : 'text-slate-300 bg-slate-800 border-slate-600 hover:bg-slate-700'
+                    ? 'bg-[var(--accent)] text-white border-[var(--accent)]'
+                    : 'text-neutral-600 bg-white border-neutral-200 hover:bg-neutral-50'
                 }`}
               >
                 {page}
@@ -59,7 +59,7 @@ export default function Pagination({
             )
           } else if (page === currentPage - 2 || page === currentPage + 2) {
             return (
-              <span key={page} className="px-2 text-slate-500">
+              <span key={page} className="px-2 text-neutral-400">
                 ...
               </span>
             )
@@ -71,9 +71,9 @@ export default function Pagination({
       {currentPage < totalPages && (
         <Link
           href={createPageUrl(currentPage + 1)}
-          className="inline-flex items-center px-3 py-2 border border-slate-600 rounded-md text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700"
+          className="inline-flex items-center px-3 py-2 border border-neutral-200 rounded-lg text-sm font-medium text-neutral-600 bg-white hover:bg-neutral-50"
         >
-          Next
+          下一頁
           <ChevronRight className="h-4 w-4 ml-1" />
         </Link>
       )}

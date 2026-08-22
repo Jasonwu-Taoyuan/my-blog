@@ -10,13 +10,12 @@ export default function Footer() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <div style={{
-              width: 24, height: 24,
-              background: 'var(--accent-dim)',
-              border: '1px solid rgba(217,119,6,.3)',
+              width: 22, height: 22,
+              background: 'linear-gradient(160deg, #0071e3, #0058b0)',
               borderRadius: 6,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 12,
-            }}>📖</div>
+              fontSize: 11, fontWeight: 700, color: '#fff',
+            }}>J</div>
             <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>
               © {new Date().getFullYear()} Jason&apos;s Blog
             </span>
