@@ -17,10 +17,10 @@ export default async function AdminPage() {
     <div className="container mx-auto px-4 py-12">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-4xl font-bold text-slate-100 mb-2">
+          <h1 className="text-4xl font-bold text-neutral-900 mb-2">
             Admin Dashboard
           </h1>
-          <p className="text-slate-400">Welcome back, {session?.user?.name}</p>
+          <p className="text-neutral-400">Welcome back, {session?.user?.name}</p>
         </div>
         <form
           action={async () => {
@@ -40,31 +40,31 @@ export default async function AdminPage() {
 
       {/* Stats */}
       <div className="grid md:grid-cols-3 gap-6 mb-12">
-        <div className="bg-slate-800 p-6 rounded-lg border border-slate-700">
+        <div className="bg-white p-6 rounded-lg border border-neutral-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-slate-400 text-sm mb-1">Published Posts</p>
-              <p className="text-3xl font-bold text-slate-100">{postsCount}</p>
+              <p className="text-neutral-400 text-sm mb-1">Published Posts</p>
+              <p className="text-3xl font-bold text-neutral-900">{postsCount}</p>
             </div>
-            <FileText className="h-12 w-12 text-amber-500" />
+            <FileText className="h-12 w-12 text-[var(--accent)]" />
           </div>
         </div>
 
-        <div className="bg-slate-800 p-6 rounded-lg border border-slate-700">
+        <div className="bg-white p-6 rounded-lg border border-neutral-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-slate-400 text-sm mb-1">Draft Posts</p>
-              <p className="text-3xl font-bold text-slate-100">{draftCount}</p>
+              <p className="text-neutral-400 text-sm mb-1">Draft Posts</p>
+              <p className="text-3xl font-bold text-neutral-900">{draftCount}</p>
             </div>
             <FileText className="h-12 w-12 text-yellow-500" />
           </div>
         </div>
 
-        <div className="bg-slate-800 p-6 rounded-lg border border-slate-700">
+        <div className="bg-white p-6 rounded-lg border border-neutral-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-slate-400 text-sm mb-1">Photos</p>
-              <p className="text-3xl font-bold text-slate-100">{photosCount}</p>
+              <p className="text-neutral-400 text-sm mb-1">Photos</p>
+              <p className="text-3xl font-bold text-neutral-900">{photosCount}</p>
             </div>
             <ImageIcon className="h-12 w-12 text-green-500" />
           </div>
@@ -75,37 +75,37 @@ export default async function AdminPage() {
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Link
           href="/admin/posts"
-          className="p-6 bg-slate-800 rounded-lg border border-slate-700 hover:border-amber-500/50 transition-all text-center"
+          className="p-6 bg-white rounded-lg border border-neutral-200 hover:border-[var(--accent)]/50 transition-all text-center"
         >
-          <FileText className="h-12 w-12 mx-auto mb-4 text-amber-500" />
-          <h3 className="font-semibold text-slate-100 mb-2">Manage Posts</h3>
-          <p className="text-sm text-slate-400">Create, edit, and delete posts</p>
+          <FileText className="h-12 w-12 mx-auto mb-4 text-[var(--accent)]" />
+          <h3 className="font-semibold text-neutral-900 mb-2">Manage Posts</h3>
+          <p className="text-sm text-neutral-400">Create, edit, and delete posts</p>
         </Link>
 
         <Link
           href="/admin/photos"
-          className="p-6 bg-slate-800 rounded-lg border border-slate-700 hover:border-amber-500/50 transition-all text-center"
+          className="p-6 bg-white rounded-lg border border-neutral-200 hover:border-[var(--accent)]/50 transition-all text-center"
         >
           <ImageIcon className="h-12 w-12 mx-auto mb-4 text-green-500" />
-          <h3 className="font-semibold text-slate-100 mb-2">Manage Photos</h3>
-          <p className="text-sm text-slate-400">Upload and manage photos</p>
+          <h3 className="font-semibold text-neutral-900 mb-2">Manage Photos</h3>
+          <p className="text-sm text-neutral-400">Upload and manage photos</p>
         </Link>
 
         <Link
           href="/admin/about"
-          className="p-6 bg-slate-800 rounded-lg border border-slate-700 hover:border-amber-500/50 transition-all text-center"
+          className="p-6 bg-white rounded-lg border border-neutral-200 hover:border-[var(--accent)]/50 transition-all text-center"
         >
           <User className="h-12 w-12 mx-auto mb-4 text-purple-500" />
-          <h3 className="font-semibold text-slate-100 mb-2">Edit About</h3>
-          <p className="text-sm text-slate-400">Update your profile</p>
+          <h3 className="font-semibold text-neutral-900 mb-2">Edit About</h3>
+          <p className="text-sm text-neutral-400">Update your profile</p>
         </Link>
 
         <Link
           href="/"
-          className="p-6 bg-slate-800 rounded-lg border border-slate-700 hover:border-amber-500/50 transition-all text-center"
+          className="p-6 bg-white rounded-lg border border-neutral-200 hover:border-[var(--accent)]/50 transition-all text-center"
         >
           <svg
-            className="h-12 w-12 mx-auto mb-4 text-slate-400"
+            className="h-12 w-12 mx-auto mb-4 text-neutral-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -123,8 +123,8 @@ export default async function AdminPage() {
               d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
             />
           </svg>
-          <h3 className="font-semibold text-slate-100 mb-2">View Site</h3>
-          <p className="text-sm text-slate-400">Go to public site</p>
+          <h3 className="font-semibold text-neutral-900 mb-2">View Site</h3>
+          <p className="text-sm text-neutral-400">Go to public site</p>
         </Link>
       </div>
     </div>

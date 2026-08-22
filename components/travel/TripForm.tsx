@@ -70,80 +70,80 @@ export default function TripForm({ trip }: { trip?: TripData }) {
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">地點名稱 *</label>
+          <label className="block text-sm font-medium text-neutral-600 mb-2">地點名稱 *</label>
           <input
             value={placeName}
             onChange={(e) => setPlaceName(e.target.value)}
             placeholder="例如：京都"
-            className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full px-4 py-2 bg-white border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">國家 / 地區</label>
+          <label className="block text-sm font-medium text-neutral-600 mb-2">國家 / 地區</label>
           <input
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             placeholder="例如：日本"
-            className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full px-4 py-2 bg-white border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">緯度 (lat) *</label>
+          <label className="block text-sm font-medium text-neutral-600 mb-2">緯度 (lat) *</label>
           <input
             value={lat}
             onChange={(e) => setLat(e.target.value)}
             placeholder="例如：35.0116"
-            className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full px-4 py-2 bg-white border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">經度 (lng) *</label>
+          <label className="block text-sm font-medium text-neutral-600 mb-2">經度 (lng) *</label>
           <input
             value={lng}
             onChange={(e) => setLng(e.target.value)}
             placeholder="例如：135.7681"
-            className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full px-4 py-2 bg-white border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">到訪日期</label>
+          <label className="block text-sm font-medium text-neutral-600 mb-2">到訪日期</label>
           <input
             type="date"
             value={visitedAt}
             onChange={(e) => setVisitedAt(e.target.value)}
-            className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full px-4 py-2 bg-white border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">封面照片 URL</label>
+          <label className="block text-sm font-medium text-neutral-600 mb-2">封面照片 URL</label>
           <input
             value={coverImageUrl}
             onChange={(e) => setCoverImageUrl(e.target.value)}
             placeholder="https://..."
-            className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full px-4 py-2 bg-white border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
           />
         </div>
       </div>
 
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-neutral-400">
         💡 座標可從 Google Maps 上對地點按右鍵複製取得
       </p>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">備註</label>
+        <label className="block text-sm font-medium text-neutral-600 mb-2">備註</label>
         <textarea
           value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder="一句話心得或備註"
           rows={3}
-          className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-100 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500"
+          className="w-full px-4 py-2 bg-white border border-neutral-300 rounded-lg text-neutral-900 resize-none focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
         />
       </div>
 
-      <div className="flex justify-end gap-3 pt-4 border-t border-slate-700">
+      <div className="flex justify-end gap-3 pt-4 border-t border-neutral-200">
         <button
           onClick={() => router.push('/admin/travel')}
-          className="px-4 py-2 border border-slate-600 text-slate-300 rounded-lg hover:bg-slate-700 transition-colors"
+          className="px-4 py-2 border border-neutral-300 text-neutral-600 rounded-lg hover:bg-neutral-50 transition-colors"
           disabled={isSaving}
         >
           取消
@@ -151,7 +151,7 @@ export default function TripForm({ trip }: { trip?: TripData }) {
         <button
           onClick={handleSave}
           disabled={isSaving}
-          className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-50 transition-colors font-medium"
+          className="px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-colors font-medium"
         >
           {isSaving ? '儲存中...' : '儲存'}
         </button>

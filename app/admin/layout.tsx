@@ -24,35 +24,43 @@ export default async function AdminLayout({
   ]
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-neutral-50">
       <div className="flex">
         {/* Sidebar */}
-        <aside className="w-64 bg-slate-800 border-r border-slate-700 min-h-screen">
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-slate-100">Admin Panel</h2>
-            <p className="text-sm text-slate-400 mt-1">{session.user?.email}</p>
+        <aside className="w-64 bg-white border-r border-neutral-200/70 min-h-screen flex flex-col">
+          <div className="p-6 flex items-center gap-3">
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm shrink-0"
+              style={{ background: 'linear-gradient(160deg, #0071e3, #0058b0)' }}
+            >
+              J
+            </div>
+            <div className="min-w-0">
+              <h2 className="text-base font-bold text-neutral-900 leading-tight">Admin Panel</h2>
+              <p className="text-xs text-neutral-400 truncate">{session.user?.email}</p>
+            </div>
           </div>
-          <nav className="mt-6">
+          <nav className="mt-2 px-3 flex-1">
             {navItems.map((item) => {
               const Icon = item.icon
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="flex items-center px-6 py-3 text-slate-300 hover:bg-slate-700 transition-colors"
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 transition-colors text-sm font-medium"
                 >
-                  <Icon className="h-5 w-5 mr-3" />
+                  <Icon className="h-[18px] w-[18px]" />
                   {item.label}
                 </Link>
               )
             })}
           </nav>
-          <div className="absolute bottom-0 w-64 p-6">
+          <div className="p-6">
             <a
               href="/api/auth/signout"
-              className="flex items-center text-slate-400 hover:text-red-400 transition-colors"
+              className="flex items-center gap-3 text-sm font-medium text-neutral-400 hover:text-red-500 transition-colors"
             >
-              <LogOut className="h-5 w-5 mr-3" />
+              <LogOut className="h-[18px] w-[18px]" />
               Sign Out
             </a>
           </div>

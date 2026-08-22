@@ -13,7 +13,7 @@ export default async function EditTripPage({ params }: Props) {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-slate-100 mb-6">編輯旅遊地點</h1>
+      <h1 className="text-3xl font-bold text-neutral-900 mb-6">編輯旅遊地點</h1>
       <TripForm trip={trip} />
     </div>
   )

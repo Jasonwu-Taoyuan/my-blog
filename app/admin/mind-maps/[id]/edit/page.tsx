@@ -13,7 +13,7 @@ export default async function EditMindMapPage({ params }: Props) {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-slate-100 mb-6">編輯思維導圖</h1>
+      <h1 className="text-3xl font-bold text-neutral-900 mb-6">編輯思維導圖</h1>
       <MindMapEditForm mindMap={mindMap} />
     </div>
   )

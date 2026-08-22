@@ -60,55 +60,55 @@ export default function AdminAboutPage() {
   }
 
   if (loading) {
-    return <div className="text-slate-400">Loading...</div>
+    return <div className="text-neutral-400">Loading...</div>
   }
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-slate-100 mb-8">Edit About Page</h1>
-      <div className="bg-slate-800 rounded-lg border border-slate-700 p-6">
+      <h1 className="text-3xl font-bold text-neutral-900 mb-8">Edit About Page</h1>
+      <div className="bg-white rounded-lg border border-neutral-200 p-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-neutral-600 mb-2">
               Display Name *
             </label>
             <input
               type="text"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
-              className="w-full px-4 py-2 bg-slate-900 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full px-4 py-2 bg-neutral-50 border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-neutral-600 mb-2">
               Headline *
             </label>
             <input
               type="text"
               value={headline}
               onChange={(e) => setHeadline(e.target.value)}
-              className="w-full px-4 py-2 bg-slate-900 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full px-4 py-2 bg-neutral-50 border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-neutral-600 mb-2">
               Bio (Markdown) *
             </label>
             <textarea
               value={bioMarkdown}
               onChange={(e) => setBioMarkdown(e.target.value)}
               rows={10}
-              className="w-full px-4 py-2 bg-slate-900 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full px-4 py-2 bg-neutral-50 border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-neutral-600 mb-2">
               Skills (comma separated)
             </label>
             <input
@@ -116,7 +116,7 @@ export default function AdminAboutPage() {
               value={skills}
               onChange={(e) => setSkills(e.target.value)}
               placeholder="React, Next.js, TypeScript"
-              className="w-full px-4 py-2 bg-slate-900 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full px-4 py-2 bg-neutral-50 border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
             />
           </div>
 
@@ -124,14 +124,14 @@ export default function AdminAboutPage() {
             <button
               type="button"
               onClick={() => router.push('/admin/dashboard')}
-              className="px-4 py-2 text-slate-300 bg-slate-700 border border-slate-600 rounded-lg hover:bg-slate-600"
+              className="px-4 py-2 text-neutral-600 bg-neutral-100 border border-neutral-300 rounded-lg hover:bg-neutral-200"
               disabled={saving}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 text-white bg-amber-600 rounded-lg hover:bg-amber-700"
+              className="px-4 py-2 text-white bg-[var(--accent)] rounded-lg hover:bg-[var(--accent-hover)]"
               disabled={saving}
             >
               {saving ? 'Saving...' : 'Save Changes'}

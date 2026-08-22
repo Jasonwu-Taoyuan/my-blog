@@ -24,7 +24,7 @@ export default function TripDeleteButton({ id, placeName }: { id: string; placeN
     <button
       onClick={handleDelete}
       disabled={isDeleting}
-      className="text-red-400 hover:text-red-300 disabled:opacity-50 transition-colors"
+      className="text-red-500 hover:text-red-600 disabled:opacity-50 transition-colors"
     >
       <Trash2 className="h-5 w-5" />
     </button>

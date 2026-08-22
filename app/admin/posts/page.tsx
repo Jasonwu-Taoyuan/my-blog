@@ -23,10 +23,10 @@ export default async function AdminPostsPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-slate-100">Manage Posts</h1>
+        <h1 className="text-4xl font-bold text-neutral-900">Manage Posts</h1>
         <Link
           href="/admin/posts/new"
-          className="flex items-center px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+          className="flex items-center px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] transition-colors"
         >
           <Plus className="h-5 w-5 mr-2" />
           New Post
@@ -34,43 +34,43 @@ export default async function AdminPostsPage() {
       </div>
 
       {formattedPosts.length > 0 ? (
-        <div className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
-          <table className="min-w-full divide-y divide-slate-700">
-            <thead className="bg-slate-800/50">
+        <div className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
+          <table className="min-w-full divide-y divide-neutral-200">
+            <thead className="bg-neutral-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">
                   Title
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">
                   Category
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">
                   Published
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">
                   Tags
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-right text-xs font-medium text-neutral-400 uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-700">
+            <tbody className="divide-y divide-neutral-200">
               {formattedPosts.map((post) => (
-                <tr key={post.id} className="hover:bg-slate-700/30">
+                <tr key={post.id} className="hover:bg-neutral-50">
                   <td className="px-6 py-4">
-                    <div className="text-sm font-medium text-slate-200">
+                    <div className="text-sm font-medium text-neutral-800">
                       {post.title}
                     </div>
-                    <div className="text-sm text-slate-500">
+                    <div className="text-sm text-neutral-400">
                       /{post.slug}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="text-sm text-amber-400">
+                    <span className="text-sm text-[var(--accent)]">
                       {post.category ? getCategoryName(post.category) : '-'}
                     </span>
                   </td>
@@ -78,14 +78,14 @@ export default async function AdminPostsPage() {
                     <span
                       className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                         post.status === 'published'
-                          ? 'bg-green-900/50 text-green-400'
-                          : 'bg-yellow-900/50 text-yellow-400'
+                          ? 'bg-green-50 text-green-700'
+                          : 'bg-yellow-50 text-yellow-700'
                       }`}
                     >
                       {post.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-400">
                     {post.publishedAt
                       ? formatDate(post.publishedAt)
                       : 'Not published'}
@@ -95,7 +95,7 @@ export default async function AdminPostsPage() {
                       {post.tags.map((tag: string) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 bg-slate-700/50 text-amber-400/80 rounded text-xs"
+                          className="px-2 py-1 bg-neutral-100 text-[var(--accent)]/80 rounded text-xs"
                         >
                           {tag}
                         </span>
@@ -106,7 +106,7 @@ export default async function AdminPostsPage() {
                     <div className="flex justify-end space-x-2">
                       <Link
                         href={`/admin/posts/${post.id}/edit`}
-                        className="text-amber-500 hover:text-amber-400"
+                        className="text-[var(--accent)] hover:text-[var(--accent)]"
                       >
                         <Edit className="h-5 w-5" />
                       </Link>
@@ -119,11 +119,11 @@ export default async function AdminPostsPage() {
           </table>
         </div>
       ) : (
-        <div className="text-center py-12 bg-slate-800 rounded-lg border border-slate-700">
-          <p className="text-slate-500 mb-4">No posts yet.</p>
+        <div className="text-center py-12 bg-white rounded-lg border border-neutral-200">
+          <p className="text-neutral-400 mb-4">No posts yet.</p>
           <Link
             href="/admin/posts/new"
-            className="inline-flex items-center px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+            className="inline-flex items-center px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] transition-colors"
           >
             <Plus className="h-5 w-5 mr-2" />
             Create your first post
