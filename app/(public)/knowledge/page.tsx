@@ -1,146 +1,101 @@
 import Link from 'next/link'
-import { Clock, ArrowUpRight } from 'lucide-react'
-import { fetchBooks, type Book } from '@/lib/notion'
+import { ArrowRight, ArrowUpRight, BookOpen, NotebookText, Sparkles } from 'lucide-react'
+import { fetchBooks } from '@/lib/notion'
 import { prisma } from '@/lib/prisma'
 import { KNOWLEDGE_LEGACY_CATEGORIES } from '@/lib/categories'
-import BookList from './BookList'
 
 export const revalidate = 86400 // 每 24 小時從 Notion 重新抓取
-
-const KNOWLEDGE_PALACE_URL = 'https://memorygym-app.zeabur.app/mind-maps'
 
 export const metadata = {
   title: '知識管理 | My Blog',
   description: '讀書筆記、歷史與跨領域思考的整理。完整心智圖與長文筆記收錄在知識宮殿。',
 }
 
-export default async function KnowledgePage() {
-  let books: Book[] = []
-  let error = ''
+const KNOWLEDGE_PALACE_URL = 'https://memorygym-app.zeabur.app/mind-maps'
 
+export default async function KnowledgePage() {
+  let bookCount = 0
   try {
-    books = await fetchBooks()
-  } catch (e: any) {
-    error = e.message || '無法載入書單，請確認 Notion API Key 設定是否正確。'
+    const books = await fetchBooks()
+    const hidden = await prisma.hiddenBook.findMany({ select: { notionId: true } })
+    const hiddenIds = new Set(hidden.map((h) => h.notionId))
+    bookCount = books.filter((b) => !hiddenIds.has(b.id)).length
+  } catch (e) {
     console.error('Notion fetch error:', e)
   }
 
-  const categories = [...new Set(books.map((b) => b.mainCategory).filter(Boolean))].sort()
-
-  const posts = await prisma.post.findMany({
+  const articleCount = await prisma.post.count({
     where: { status: 'published', category: { in: KNOWLEDGE_LEGACY_CATEGORIES } },
-    orderBy: { publishedAt: 'desc' },
   })
-  const formattedPosts = posts.map((post) => ({
-    ...post,
-    tags: JSON.parse(post.tags || '[]') as string[],
-  }))
+
+  const categories = [
+    {
+      href: '/knowledge/books',
+      external: false,
+      name: '讀書清單',
+      desc: '借閱過的書籍與分類摘要',
+      count: `${bookCount} 本書籍`,
+      color: 'var(--accent)',
+      icon: <BookOpen size={22} />,
+    },
+    {
+      href: '/knowledge/articles',
+      external: false,
+      name: '文章筆記',
+      desc: '讀書心得、歷史與跨領域思考',
+      count: `${articleCount} 篇文章`,
+      color: 'var(--emerald)',
+      icon: <NotebookText size={22} />,
+    },
+    {
+      href: KNOWLEDGE_PALACE_URL,
+      external: true,
+      name: '知識萃取',
+      desc: '逐章逐頁的心智圖與筆記',
+      count: '前往知識宮殿',
+      color: 'var(--purple)',
+      icon: <Sparkles size={22} />,
+    },
+  ]
 
   return (
     <div className="container mx-auto px-4 py-12" style={{ maxWidth: 1100 }}>
-      <div className="mb-4">
+      <div className="mb-8">
         <p className="text-sm font-semibold mb-2" style={{ color: 'var(--accent)' }}>知識管理</p>
         <h1 className="text-4xl font-bold text-neutral-900 tracking-tight mb-3">讀書筆記、歷史與跨領域思考的整理</h1>
-        <p className="text-base text-neutral-500 mb-1">這裡只放精選摘要與心得。</p>
-        <p className="text-sm text-neutral-400">
-          完整的心智圖與長文筆記收錄在
-          <a
-            href={KNOWLEDGE_PALACE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold hover:underline"
-            style={{ color: 'var(--accent)' }}
-          >
-            我的知識宮殿
-          </a>
-          。
-        </p>
+        <p className="text-base text-neutral-500">這裡只放精選摘要與心得，完整的心智圖與長文筆記收錄在知識宮殿。</p>
       </div>
 
-      {/* 讀書清單 */}
-      <section className="py-11 border-b border-neutral-200/70">
-        <div className="flex items-baseline justify-between mb-6">
-          <h2 className="text-2xl font-bold text-neutral-900 tracking-tight">讀書清單</h2>
-          {books.length > 0 && (
-            <p className="text-sm text-neutral-400">
-              共 <span className="font-semibold" style={{ color: 'var(--accent)' }}>{books.length}</span> 本書籍 ·
-              資料來源：Notion
-            </p>
-          )}
-        </div>
-
-        {error && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 mb-8 text-sm">
-            ⚠ {error}
-          </div>
-        )}
-
-        {books.length > 0 && <BookList books={books} categories={categories} />}
-      </section>
-
-      {/* 文章筆記（含歷史、跨領域思考） */}
-      <section className="py-11">
-        <div className="flex items-baseline justify-between mb-6">
-          <h2 className="text-2xl font-bold text-neutral-900 tracking-tight">文章筆記</h2>
-          {formattedPosts.length > 0 && (
-            <p className="text-sm text-neutral-400">
-              共 <span className="font-semibold" style={{ color: 'var(--accent)' }}>{formattedPosts.length}</span> 篇文章
-            </p>
-          )}
-        </div>
-
-        {formattedPosts.length === 0 ? (
-          <p className="text-neutral-400 text-center py-12">尚無文章</p>
-        ) : (
-          <div className="flex flex-col rounded-2xl border border-neutral-200/70 bg-neutral-200/70 overflow-hidden shadow-sm" style={{ gap: 1 }}>
-            {formattedPosts.map((post) => (
-              <Link
-                key={post.id}
-                href={`/posts/${post.slug}`}
-                className="bg-white px-6 py-5 flex items-center gap-4 hover:bg-neutral-50 transition-colors"
-              >
-                <div className="flex-1 min-w-0">
-                  <div className="text-[15px] font-bold text-neutral-900 tracking-tight mb-1">{post.title}</div>
-                  <div className="text-sm text-neutral-500 truncate">{post.summary}</div>
-                </div>
-                <div className="flex items-center gap-3 text-xs text-neutral-400 whitespace-nowrap">
-                  {post.tags[0] && (
-                    <span
-                      className="px-2.5 py-1 rounded-full font-semibold"
-                      style={
-                        post.category === 'knowledge'
-                          ? { background: 'color-mix(in srgb, var(--accent) 12%, transparent)', color: 'var(--accent)' }
-                          : { background: 'rgba(0,0,0,.05)', color: 'var(--text-secondary)' }
-                      }
-                    >
-                      {post.tags[0]}
-                    </span>
-                  )}
-                  <span className="flex items-center gap-1"><Clock size={12} />{post.readingTimeMinutes} 分鐘</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* 知識萃取 → 連結到知識宮殿 */}
-      <section className="pb-11">
-        <div className="rounded-2xl border border-neutral-200/70 bg-white shadow-sm p-8 flex items-center justify-between gap-6 flex-wrap">
-          <div>
-            <h2 className="text-xl font-bold text-neutral-900 tracking-tight mb-1">知識萃取</h2>
-            <p className="text-sm text-neutral-500">逐章逐頁的心智圖與筆記，收錄在我的知識宮殿。</p>
-          </div>
-          <a
-            href={KNOWLEDGE_PALACE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mg-btn mg-btn-primary shrink-0"
-          >
-            查看知識宮殿 <ArrowUpRight size={14} />
-          </a>
-        </div>
-      </section>
+      <div className="grid md:grid-cols-3 gap-4">
+        {categories.map((cat) => {
+          const cardProps = cat.external
+            ? { href: cat.href, target: '_blank', rel: 'noopener noreferrer' }
+            : { href: cat.href }
+          const Wrapper: any = cat.external ? 'a' : Link
+          return (
+            <Wrapper
+              key={cat.name}
+              {...cardProps}
+              className="mod-card"
+              style={{ '--card-color': cat.color } as React.CSSProperties}
+            >
+              <div className="mod-icon" style={{ background: cat.color }}>{cat.icon}</div>
+              <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 4px', letterSpacing: '-.01em' }}>
+                {cat.name}
+              </p>
+              <p style={{ fontSize: 12.5, color: 'var(--text-secondary)', lineHeight: 1.55, margin: 0 }}>
+                {cat.desc}
+              </p>
+              <div style={{
+                marginTop: 14, fontSize: 11, color: cat.color, fontWeight: 600,
+                display: 'flex', alignItems: 'center', gap: 4,
+              }}>
+                {cat.count} {cat.external ? <ArrowUpRight size={11} /> : <ArrowRight size={11} />}
+              </div>
+            </Wrapper>
+          )
+        })}
+      </div>
     </div>
   )
 }

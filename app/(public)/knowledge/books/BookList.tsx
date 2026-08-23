@@ -2,16 +2,21 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { X } from 'lucide-react'
 import type { Book } from '@/lib/notion'
 
 interface Props {
   books: Book[]
   categories: string[]
+  isAdmin?: boolean
 }
 
-export default function BookList({ books, categories }: Props) {
+export default function BookList({ books, categories, isAdmin }: Props) {
+  const router = useRouter()
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('全部')
+  const [hidingId, setHidingId] = useState<string | null>(null)
 
   const filtered = useMemo(() => {
     return books.filter((book) => {
@@ -34,6 +39,25 @@ export default function BookList({ books, categories }: Props) {
     })
     return map
   }, [books, categories])
+
+  const handleHide = async (e: React.MouseEvent, book: Book) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (!confirm(`確定要在網站上隱藏「${book.title}」嗎？（Notion 資料不會被刪除，之後可以在後台取消隱藏）`)) return
+
+    setHidingId(book.id)
+    const res = await fetch('/api/hidden-books', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ notionId: book.id, title: book.title }),
+    })
+    if (res.ok) {
+      router.refresh()
+    } else {
+      alert('隱藏失敗，請重試')
+      setHidingId(null)
+    }
+  }
 
   return (
     <div>
@@ -81,11 +105,22 @@ export default function BookList({ books, categories }: Props) {
           {filtered.map((book) => (
             <Link
               key={book.id}
-              href={`/knowledge/${book.id}`}
-              className="block bg-white border border-neutral-200/70 rounded-2xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
+              href={`/knowledge/books/${book.id}`}
+              className="relative block bg-white border border-neutral-200/70 rounded-2xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
             >
+              {isAdmin && (
+                <button
+                  onClick={(e) => handleHide(e, book)}
+                  disabled={hidingId === book.id}
+                  title="在網站上隱藏這本書"
+                  className="absolute top-3 right-3 w-6 h-6 rounded-full bg-neutral-100 hover:bg-red-50 text-neutral-400 hover:text-red-500 flex items-center justify-center transition-colors disabled:opacity-50"
+                >
+                  <X size={13} />
+                </button>
+              )}
+
               {/* 編號 + 書名 */}
-              <div className="flex items-start gap-3 mb-3">
+              <div className="flex items-start gap-3 mb-3 pr-6">
                 {book.number && (
                   <span className="text-xs text-neutral-400 mt-1 shrink-0">
                     #{book.number}

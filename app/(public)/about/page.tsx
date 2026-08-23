@@ -35,7 +35,7 @@ export default async function AboutPage() {
   const skills = about.skills ? JSON.parse(about.skills) : []
 
   return (
-    <div className="container mx-auto px-4 py-12" style={{ maxWidth: 720 }}>
+    <div className="container mx-auto px-4 py-12" style={{ maxWidth: 880 }}>
       {/* Hero */}
       <div className="flex flex-col items-center text-center pt-8 pb-8">
         <div
@@ -74,7 +74,7 @@ export default async function AboutPage() {
 
       {/* Bio */}
       <section className="py-8 border-t border-neutral-200/70">
-        <div className="prose max-w-none text-center mx-auto" style={{ maxWidth: 560 }}>
+        <div className="prose max-w-none mx-auto" style={{ maxWidth: 760 }}>
           <ReactMarkdown>{about.bioMarkdown}</ReactMarkdown>
         </div>
       </section>

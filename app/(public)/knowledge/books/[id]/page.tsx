@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props) {
   const book = await fetchBookById(id)
   if (!book) return { title: 'Not Found' }
   return {
-    title: `${book.title} | 知識管理`,
+    title: `${book.title} | 讀書清單`,
     description: `${book.mainCategory} · ${book.subCategory}`,
   }
 }
@@ -31,10 +31,10 @@ export default async function BookDetailPage({ params }: Props) {
     <div className="container mx-auto px-4 py-12 max-w-3xl">
       {/* 返回 */}
       <Link
-        href="/knowledge"
+        href="/knowledge/books"
         className="inline-flex items-center gap-2 text-neutral-400 hover:text-[var(--accent)] transition-colors mb-8 text-sm"
       >
-        ← 返回知識管理
+        ← 返回讀書清單
       </Link>
 
       {/* 書籍資訊 */}

@@ -89,3 +89,9 @@ model Trip {
 
   @@index([country])
 }
+
+model HiddenBook {
+  id        String   @id @default(cuid())
+  notionId  String   @unique
+  createdAt DateTime @default(now())
+}
