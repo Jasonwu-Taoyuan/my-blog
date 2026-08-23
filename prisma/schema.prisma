@@ -95,3 +95,12 @@ model HiddenBook {
   notionId  String   @unique
   createdAt DateTime @default(now())
 }
+
+model BookReview {
+  id        String   @id @default(cuid())
+  notionId  String   @unique
+  rating    Int?
+  review    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

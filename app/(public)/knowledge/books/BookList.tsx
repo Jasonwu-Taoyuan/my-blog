@@ -5,14 +5,16 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { X } from 'lucide-react'
 import type { Book } from '@/lib/notion'
+import StarRating from '@/components/books/StarRating'
 
 interface Props {
   books: Book[]
   categories: string[]
   isAdmin?: boolean
+  ratings?: Record<string, number>
 }
 
-export default function BookList({ books, categories, isAdmin }: Props) {
+export default function BookList({ books, categories, isAdmin, ratings = {} }: Props) {
   const router = useRouter()
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('全部')
@@ -130,6 +132,13 @@ export default function BookList({ books, categories, isAdmin }: Props) {
                   {book.title}
                 </h3>
               </div>
+
+              {/* 評價 */}
+              {ratings[book.id] && (
+                <div className="mb-2">
+                  <StarRating rating={ratings[book.id]} size={13} />
+                </div>
+              )}
 
               {/* 標籤 */}
               <div className="flex flex-wrap gap-2">

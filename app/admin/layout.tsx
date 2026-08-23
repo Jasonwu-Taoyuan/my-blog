@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/auth'
 import Link from 'next/link'
-import { LayoutDashboard, FileText, Image, User, LogOut, GitBranch, MapPin } from 'lucide-react'
+import { LayoutDashboard, FileText, Image, User, LogOut, GitBranch, MapPin, BookOpen } from 'lucide-react'
 
 export default async function AdminLayout({
   children,
@@ -19,6 +19,7 @@ export default async function AdminLayout({
     { href: '/admin/posts', label: '文章', icon: FileText },
     { href: '/admin/photos', label: '相片', icon: Image },
     { href: '/admin/travel', label: '旅遊地圖', icon: MapPin },
+    { href: '/admin/books', label: '讀書清單', icon: BookOpen },
     { href: '/admin/mind-maps', label: '思維導圖', icon: GitBranch },
     { href: '/admin/about', label: '關於我', icon: User },
   ]

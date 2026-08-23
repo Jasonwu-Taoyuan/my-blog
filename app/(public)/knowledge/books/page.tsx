@@ -30,6 +30,11 @@ export default async function BooksPage() {
   const visibleBooks = books.filter((b) => !hiddenIds.has(b.id))
   const hiddenBooks = books.filter((b) => hiddenIds.has(b.id))
 
+  const reviews = await prisma.bookReview.findMany()
+  const ratings = Object.fromEntries(
+    reviews.filter((r) => r.rating).map((r) => [r.notionId, r.rating as number])
+  )
+
   const categories = [...new Set(visibleBooks.map((b) => b.mainCategory).filter(Boolean))].sort()
 
   return (
@@ -58,7 +63,7 @@ export default async function BooksPage() {
       )}
 
       {visibleBooks.length > 0 && (
-        <BookList books={visibleBooks} categories={categories} isAdmin={!!session} />
+        <BookList books={visibleBooks} categories={categories} isAdmin={!!session} ratings={ratings} />
       )}
 
       {session && hiddenBooks.length > 0 && (

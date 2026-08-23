@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { fetchBookById, fetchBookBlocks } from '@/lib/notion'
+import { prisma } from '@/lib/prisma'
+import StarRating from '@/components/books/StarRating'
 
 export const revalidate = 3600
 
@@ -20,9 +22,10 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function BookDetailPage({ params }: Props) {
   const { id } = await params
-  const [book, blocks] = await Promise.all([
+  const [book, blocks, review] = await Promise.all([
     fetchBookById(id),
     fetchBookBlocks(id),
+    prisma.bookReview.findUnique({ where: { notionId: id } }),
   ])
 
   if (!book) notFound()
@@ -71,6 +74,20 @@ export default async function BookDetailPage({ params }: Props) {
           {book.callNumber && <span>索書號：{book.callNumber}</span>}
         </div>
       </div>
+
+      {/* 評價與心得 */}
+      {(review?.rating || review?.review) && (
+        <div className="bg-[var(--accent)]/5 border border-[var(--accent)]/10 rounded-2xl p-6 mb-8">
+          {review.rating && (
+            <div className="flex items-center gap-2 mb-3">
+              <StarRating rating={review.rating} size={18} />
+            </div>
+          )}
+          {review.review && (
+            <p className="text-neutral-700 leading-relaxed whitespace-pre-wrap">{review.review}</p>
+          )}
+        </div>
+      )}
 
       {/* 分隔線 */}
       <hr className="border-neutral-200 mb-8" />
