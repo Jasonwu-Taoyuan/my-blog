@@ -22,13 +22,14 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function BookDetailPage({ params }: Props) {
   const { id } = await params
-  const [book, blocks, review] = await Promise.all([
+  const [book, blocks, review, hidden] = await Promise.all([
     fetchBookById(id),
     fetchBookBlocks(id),
     prisma.bookReview.findUnique({ where: { notionId: id } }),
+    prisma.hiddenBook.findUnique({ where: { notionId: id } }),
   ])
 
-  if (!book) notFound()
+  if (!book || hidden) notFound()
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-3xl">

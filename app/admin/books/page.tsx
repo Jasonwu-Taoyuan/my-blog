@@ -4,6 +4,7 @@ import { BookOpen, Edit } from 'lucide-react'
 import { fetchBooks, type Book } from '@/lib/notion'
 import { prisma } from '@/lib/prisma'
 import StarRating from '@/components/books/StarRating'
+import UnhideButton from '@/components/books/UnhideButton'
 
 export default async function AdminBooksPage() {
   let books: Book[] = []
@@ -15,6 +16,11 @@ export default async function AdminBooksPage() {
     error = e.message || '無法載入書單，請確認 Notion API Key 設定是否正確。'
     console.error('Notion fetch error:', e)
   }
+
+  const hidden = await prisma.hiddenBook.findMany({ orderBy: { createdAt: 'desc' } })
+  const hiddenIds = new Set(hidden.map((h) => h.notionId))
+  const visibleBooks = books.filter((b) => !hiddenIds.has(b.id))
+  const hiddenBooks = books.filter((b) => hiddenIds.has(b.id))
 
   const reviews = await prisma.bookReview.findMany()
   const reviewMap = new Map(reviews.map((r) => [r.notionId, r]))
@@ -32,7 +38,7 @@ export default async function AdminBooksPage() {
         </div>
       )}
 
-      {books.length === 0 ? (
+      {visibleBooks.length === 0 ? (
         !error && (
           <div className="text-center py-20 bg-neutral-50 rounded-xl border border-neutral-200">
             <BookOpen className="h-12 w-12 text-neutral-300 mx-auto mb-3" />
@@ -52,7 +58,7 @@ export default async function AdminBooksPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-200">
-              {books.map((book) => {
+              {visibleBooks.map((book) => {
                 const review = reviewMap.get(book.id)
                 return (
                   <tr key={book.id} className="hover:bg-neutral-50 transition-colors">
@@ -87,6 +93,23 @@ export default async function AdminBooksPage() {
             </tbody>
           </table>
         </div>
+      )}
+
+      {hiddenBooks.length > 0 && (
+        <section className="mt-10 pt-8 border-t border-neutral-200/70">
+          <h2 className="text-sm font-semibold text-neutral-400 mb-4">已隱藏書籍（{hiddenBooks.length}）</h2>
+          <div className="flex flex-col gap-2">
+            {hiddenBooks.map((book) => (
+              <div
+                key={book.id}
+                className="flex items-center justify-between bg-neutral-50 border border-neutral-200/70 rounded-xl px-4 py-3"
+              >
+                <span className="text-sm text-neutral-500">{book.title}</span>
+                <UnhideButton notionId={book.id} />
+              </div>
+            ))}
+          </div>
+        </section>
       )}
     </div>
   )

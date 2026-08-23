@@ -13,6 +13,9 @@ export default async function EditBookReviewPage({ params }: Props) {
   const book = await fetchBookById(id)
   if (!book) notFound()
 
+  const hidden = await prisma.hiddenBook.findUnique({ where: { notionId: id } })
+  if (hidden) notFound()
+
   const review = await prisma.bookReview.findUnique({ where: { notionId: id } })
 
   return (

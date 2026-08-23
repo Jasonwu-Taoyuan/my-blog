@@ -20,6 +20,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'rating must be between 1 and 5' }, { status: 400 })
     }
 
+    const hidden = await prisma.hiddenBook.findUnique({ where: { notionId: String(notionId) } })
+    if (hidden) {
+      return NextResponse.json({ error: 'Cannot review a hidden book' }, { status: 400 })
+    }
+
     const data = {
       rating: rating != null ? Number(rating) : null,
       review: review || null,

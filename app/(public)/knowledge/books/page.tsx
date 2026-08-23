@@ -3,7 +3,6 @@ import { auth } from '@/auth'
 import { fetchBooks, type Book } from '@/lib/notion'
 import { prisma } from '@/lib/prisma'
 import BookList from './BookList'
-import UnhideButton from './UnhideButton'
 
 export const revalidate = 86400 // 每 24 小時從 Notion 重新抓取
 
@@ -25,10 +24,9 @@ export default async function BooksPage() {
     console.error('Notion fetch error:', e)
   }
 
-  const hidden = await prisma.hiddenBook.findMany({ orderBy: { createdAt: 'desc' } })
+  const hidden = await prisma.hiddenBook.findMany()
   const hiddenIds = new Set(hidden.map((h) => h.notionId))
   const visibleBooks = books.filter((b) => !hiddenIds.has(b.id))
-  const hiddenBooks = books.filter((b) => hiddenIds.has(b.id))
 
   const reviews = await prisma.bookReview.findMany()
   const ratings = Object.fromEntries(
@@ -64,23 +62,6 @@ export default async function BooksPage() {
 
       {visibleBooks.length > 0 && (
         <BookList books={visibleBooks} categories={categories} isAdmin={!!session} ratings={ratings} />
-      )}
-
-      {session && hiddenBooks.length > 0 && (
-        <section className="mt-14 pt-8 border-t border-neutral-200/70">
-          <h2 className="text-sm font-semibold text-neutral-400 mb-4">已隱藏書籍（{hiddenBooks.length}）</h2>
-          <div className="flex flex-col gap-2">
-            {hiddenBooks.map((book) => (
-              <div
-                key={book.id}
-                className="flex items-center justify-between bg-neutral-50 border border-neutral-200/70 rounded-xl px-4 py-3"
-              >
-                <span className="text-sm text-neutral-500">{book.title}</span>
-                <UnhideButton notionId={book.id} />
-              </div>
-            ))}
-          </div>
-        </section>
       )}
     </div>
   )
