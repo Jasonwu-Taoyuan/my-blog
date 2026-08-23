@@ -76,16 +76,21 @@ export default async function BookDetailPage({ params }: Props) {
         </div>
       </div>
 
-      {/* 評價與心得 */}
-      {(review?.rating || review?.review) && (
-        <div className="bg-[var(--accent)]/5 border border-[var(--accent)]/10 rounded-2xl p-6 mb-8">
-          {review.rating && (
-            <div className="flex items-center gap-2 mb-3">
-              <StarRating rating={review.rating} size={18} />
+      {/* 評價、摘要與心得 */}
+      {(review?.rating || review?.summary || review?.notes) && (
+        <div className="bg-[var(--accent)]/5 border border-[var(--accent)]/10 rounded-2xl p-6 mb-8 flex flex-col gap-4">
+          {review.rating && <StarRating rating={review.rating} size={18} />}
+          {review.summary && (
+            <div>
+              <h2 className="text-xs font-semibold text-neutral-400 mb-1">摘要</h2>
+              <p className="text-neutral-700 leading-relaxed whitespace-pre-wrap">{review.summary}</p>
             </div>
           )}
-          {review.review && (
-            <p className="text-neutral-700 leading-relaxed whitespace-pre-wrap">{review.review}</p>
+          {review.notes && (
+            <div>
+              <h2 className="text-xs font-semibold text-neutral-400 mb-1">心得</h2>
+              <p className="text-neutral-700 leading-relaxed whitespace-pre-wrap">{review.notes}</p>
+            </div>
           )}
         </div>
       )}

@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { notionId, rating, review } = body
+    const { notionId, rating, summary, notes } = body
 
     if (!notionId) {
       return NextResponse.json({ error: 'notionId is required' }, { status: 400 })
@@ -27,7 +27,8 @@ export async function POST(request: NextRequest) {
 
     const data = {
       rating: rating != null ? Number(rating) : null,
-      review: review || null,
+      summary: summary || null,
+      notes: notes || null,
     }
 
     const saved = await prisma.bookReview.upsert({

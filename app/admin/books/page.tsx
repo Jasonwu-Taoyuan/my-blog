@@ -53,6 +53,7 @@ export default async function AdminBooksPage() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">書名</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">分類</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">評價</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">摘要</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">心得</th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-neutral-400 uppercase tracking-wider">操作</th>
               </tr>
@@ -75,7 +76,10 @@ export default async function AdminBooksPage() {
                       )}
                     </td>
                     <td className="px-6 py-4 text-sm text-neutral-400 max-w-xs truncate">
-                      {review?.review || '—'}
+                      {review?.summary || '—'}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-400 max-w-xs truncate">
+                      {review?.notes || '—'}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex justify-end">

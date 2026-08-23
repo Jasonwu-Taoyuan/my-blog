@@ -8,13 +8,15 @@ import StarRating from '@/components/books/StarRating'
 interface Props {
   notionId: string
   initialRating: number
-  initialReview: string
+  initialSummary: string
+  initialNotes: string
 }
 
-export default function BookReviewForm({ notionId, initialRating, initialReview }: Props) {
+export default function BookReviewForm({ notionId, initialRating, initialSummary, initialNotes }: Props) {
   const router = useRouter()
   const [rating, setRating] = useState(initialRating)
-  const [review, setReview] = useState(initialReview)
+  const [summary, setSummary] = useState(initialSummary)
+  const [notes, setNotes] = useState(initialNotes)
   const [isSaving, setIsSaving] = useState(false)
 
   const handleSave = async () => {
@@ -22,7 +24,7 @@ export default function BookReviewForm({ notionId, initialRating, initialReview 
     const res = await fetch('/api/book-reviews', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ notionId, rating: rating || null, review: review || null }),
+      body: JSON.stringify({ notionId, rating: rating || null, summary: summary || null, notes: notes || null }),
     })
     if (res.ok) {
       router.push('/admin/books')
@@ -52,15 +54,29 @@ export default function BookReviewForm({ notionId, initialRating, initialReview 
       </div>
 
       <div>
-        <label htmlFor="review" className="block text-sm font-medium text-neutral-600 mb-2">
-          摘要與心得
+        <label htmlFor="summary" className="block text-sm font-medium text-neutral-600 mb-2">
+          摘要
         </label>
         <textarea
-          id="review"
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-          rows={10}
-          placeholder="寫下這本書的重點摘要與個人心得..."
+          id="summary"
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+          rows={6}
+          placeholder="寫下這本書的重點摘要..."
+          className="w-full bg-white border border-neutral-200 rounded-xl px-4 py-3 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30 focus:border-[var(--accent)] transition-colors resize-y"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="notes" className="block text-sm font-medium text-neutral-600 mb-2">
+          心得
+        </label>
+        <textarea
+          id="notes"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          rows={6}
+          placeholder="寫下個人心得..."
           className="w-full bg-white border border-neutral-200 rounded-xl px-4 py-3 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30 focus:border-[var(--accent)] transition-colors resize-y"
         />
       </div>

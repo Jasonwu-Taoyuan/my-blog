@@ -25,7 +25,8 @@ export default async function EditBookReviewPage({ params }: Props) {
       <BookReviewForm
         notionId={id}
         initialRating={review?.rating || 0}
-        initialReview={review?.review || ''}
+        initialSummary={review?.summary || ''}
+        initialNotes={review?.notes || ''}
       />
     </div>
   )
