@@ -1,11 +1,13 @@
 import Link from 'next/link'
-import { Clock } from 'lucide-react'
+import { Clock, ArrowUpRight } from 'lucide-react'
 import { fetchBooks, type Book } from '@/lib/notion'
 import { prisma } from '@/lib/prisma'
 import { KNOWLEDGE_LEGACY_CATEGORIES } from '@/lib/categories'
 import BookList from './BookList'
 
 export const revalidate = 86400 // 每 24 小時從 Notion 重新抓取
+
+const KNOWLEDGE_PALACE_URL = 'https://memorygym-app.zeabur.app/mind-maps'
 
 export const metadata = {
   title: '知識管理 | My Blog',
@@ -40,7 +42,19 @@ export default async function KnowledgePage() {
         <p className="text-sm font-semibold mb-2" style={{ color: 'var(--accent)' }}>知識管理</p>
         <h1 className="text-4xl font-bold text-neutral-900 tracking-tight mb-3">讀書筆記、歷史與跨領域思考的整理</h1>
         <p className="text-base text-neutral-500 mb-1">這裡只放精選摘要與心得。</p>
-        <p className="text-sm text-neutral-400">完整的心智圖與長文筆記收錄在我的知識宮殿。</p>
+        <p className="text-sm text-neutral-400">
+          完整的心智圖與長文筆記收錄在
+          <a
+            href={KNOWLEDGE_PALACE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold hover:underline"
+            style={{ color: 'var(--accent)' }}
+          >
+            我的知識宮殿
+          </a>
+          。
+        </p>
       </div>
 
       {/* 讀書清單 */}
@@ -108,6 +122,24 @@ export default async function KnowledgePage() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* 知識萃取 → 連結到知識宮殿 */}
+      <section className="pb-11">
+        <div className="rounded-2xl border border-neutral-200/70 bg-white shadow-sm p-8 flex items-center justify-between gap-6 flex-wrap">
+          <div>
+            <h2 className="text-xl font-bold text-neutral-900 tracking-tight mb-1">知識萃取</h2>
+            <p className="text-sm text-neutral-500">逐章逐頁的心智圖與筆記，收錄在我的知識宮殿。</p>
+          </div>
+          <a
+            href={KNOWLEDGE_PALACE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mg-btn mg-btn-primary shrink-0"
+          >
+            查看知識宮殿 <ArrowUpRight size={14} />
+          </a>
+        </div>
       </section>
     </div>
   )
