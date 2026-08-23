@@ -73,6 +73,13 @@ export async function fetchBookBlocks(pageId: string): Promise<NotionBlock[]> {
   })
 }
 
+export function blocksToText(blocks: NotionBlock[]): string {
+  return blocks
+    .map((block) => block.content)
+    .filter(Boolean)
+    .join('\n\n')
+}
+
 export async function fetchBooks(): Promise<Book[]> {
   const allBooks: Book[] = []
   let cursor: string | undefined = undefined
