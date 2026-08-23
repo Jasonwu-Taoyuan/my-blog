@@ -63,7 +63,7 @@ export default function PostEditor({
       }
     } catch (error) {
       console.error('Upload failed:', error)
-      alert('Failed to upload image')
+      alert('圖片上傳失敗')
     } finally {
       setIsUploading(false)
     }
@@ -90,7 +90,7 @@ export default function PostEditor({
       await onSave(postData)
     } catch (error) {
       console.error('Save failed:', error)
-      alert('Failed to save post')
+      alert('文章儲存失敗')
     } finally {
       setIsSaving(false)
     }
@@ -100,7 +100,7 @@ export default function PostEditor({
     <form className="space-y-6">
       <div>
         <label className="block text-sm font-medium text-neutral-600 mb-2">
-          Title *
+          標題 *
         </label>
         <input
           type="text"
@@ -113,7 +113,7 @@ export default function PostEditor({
 
       <div>
         <label className="block text-sm font-medium text-neutral-600 mb-2">
-          Summary *
+          摘要 *
         </label>
         <textarea
           value={summary}
@@ -126,7 +126,7 @@ export default function PostEditor({
 
       <div>
         <label className="block text-sm font-medium text-neutral-600 mb-2">
-          Cover Image
+          封面圖片
         </label>
         <input
           type="file"
@@ -147,20 +147,20 @@ export default function PostEditor({
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-neutral-600 mb-2">
-            Tags (comma separated)
+            標籤（以逗號分隔）
           </label>
           <input
             type="text"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
-            placeholder="nextjs, react, typescript"
+            placeholder="營運管理, 讀書筆記, 旅遊"
             className="w-full px-4 py-2 bg-white border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent"
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-neutral-600 mb-2">
-            Category *
+            分類 *
           </label>
           <select
             value={category}
@@ -180,7 +180,7 @@ export default function PostEditor({
 
       <div>
         <label className="block text-sm font-medium text-neutral-600 mb-2">
-          Content * (Markdown)
+          內容 *（Markdown）
         </label>
         <SimpleMDE value={content} onChange={setContent} />
       </div>
@@ -192,7 +192,7 @@ export default function PostEditor({
           className="px-4 py-2 text-neutral-600 bg-white border border-neutral-300 rounded-lg hover:bg-neutral-50"
           disabled={isSaving}
         >
-          Cancel
+          取消
         </button>
         <div className="flex space-x-3">
           <button
@@ -201,7 +201,7 @@ export default function PostEditor({
             className="px-4 py-2 text-neutral-600 bg-white border border-neutral-300 rounded-lg hover:bg-neutral-50"
             disabled={isSaving}
           >
-            {isSaving ? 'Saving...' : 'Save Draft'}
+            {isSaving ? '儲存中...' : '儲存草稿'}
           </button>
           <button
             type="button"
@@ -209,7 +209,7 @@ export default function PostEditor({
             className="px-4 py-2 text-white bg-[var(--accent)] rounded-lg hover:bg-[var(--accent-hover)]"
             disabled={isSaving}
           >
-            {isSaving ? 'Publishing...' : 'Publish'}
+            {isSaving ? '發布中...' : '發布'}
           </button>
         </div>
       </div>

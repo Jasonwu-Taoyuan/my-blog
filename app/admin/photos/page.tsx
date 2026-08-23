@@ -87,7 +87,7 @@ export default function AdminPhotosPage() {
       setShowUploadModal(false)
     } catch (error) {
       console.error('Upload failed:', error)
-      alert('Failed to upload photos')
+      alert('相片上傳失敗')
     } finally {
       setUploading(false)
     }
@@ -110,29 +110,29 @@ export default function AdminPhotosPage() {
       setEditDescription('')
     } catch (error) {
       console.error('Edit failed:', error)
-      alert('Failed to update photo')
+      alert('相片更新失敗')
     }
   }
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this photo?')) return
+    if (!confirm('確定要刪除這張相片嗎？')) return
 
     try {
       await fetch(`/api/photos/${id}`, { method: 'DELETE' })
       await fetchPhotos()
     } catch (error) {
       console.error('Delete failed:', error)
-      alert('Failed to delete photo')
+      alert('相片刪除失敗')
     }
   }
 
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-neutral-900">Photos Management</h1>
+        <h1 className="text-3xl font-bold text-neutral-900">相片管理</h1>
         <label className="inline-flex items-center px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] transition-colors cursor-pointer">
           <Plus className="h-5 w-5 mr-2" />
-          Upload Photos
+          上傳相片
           <input
             type="file"
             multiple
@@ -185,7 +185,7 @@ export default function AdminPhotosPage() {
           <div className="bg-white border border-neutral-200 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-neutral-900">Add Photo Captions</h2>
+                <h2 className="text-2xl font-bold text-neutral-900">新增相片說明</h2>
                 <button
                   onClick={() => {
                     setShowUploadModal(false)
@@ -208,7 +208,7 @@ export default function AdminPhotosPage() {
                     <div className="flex-1">
                       <p className="font-medium text-neutral-800 mb-2">{photo.file.name}</p>
                       <textarea
-                        placeholder="Add a caption/description (optional)"
+                        placeholder="新增說明文字（選填）"
                         value={photo.description}
                         onChange={(e) => updateDescription(index, e.target.value)}
                         className="w-full bg-neutral-50 border border-neutral-300 rounded px-3 py-2 text-neutral-900 resize-none"
@@ -234,14 +234,14 @@ export default function AdminPhotosPage() {
                   className="px-4 py-2 border border-neutral-300 text-neutral-600 rounded-lg hover:bg-neutral-50"
                   disabled={uploading}
                 >
-                  Cancel
+                  取消
                 </button>
                 <button
                   onClick={handleUploadAll}
                   disabled={uploading || pendingPhotos.length === 0}
                   className="px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] disabled:opacity-50"
                 >
-                  {uploading ? 'Uploading...' : `Upload ${pendingPhotos.length} Photo${pendingPhotos.length !== 1 ? 's' : ''}`}
+                  {uploading ? '上傳中...' : `上傳 ${pendingPhotos.length} 張相片`}
                 </button>
               </div>
             </div>
@@ -255,7 +255,7 @@ export default function AdminPhotosPage() {
           <div className="bg-white border border-neutral-200 rounded-lg max-w-md w-full">
             <div className="p-6">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-neutral-900">Edit Caption</h2>
+                <h2 className="text-xl font-bold text-neutral-900">編輯說明</h2>
                 <button
                   onClick={() => {
                     setEditingPhoto(null)
@@ -276,7 +276,7 @@ export default function AdminPhotosPage() {
               </div>
 
               <textarea
-                placeholder="Add a caption/description"
+                placeholder="新增說明文字"
                 value={editDescription}
                 onChange={(e) => setEditDescription(e.target.value)}
                 className="w-full bg-neutral-50 border border-neutral-300 rounded px-3 py-2 text-neutral-900 resize-none mb-4"
@@ -291,13 +291,13 @@ export default function AdminPhotosPage() {
                   }}
                   className="px-4 py-2 border border-neutral-300 text-neutral-600 rounded-lg hover:bg-neutral-50"
                 >
-                  Cancel
+                  取消
                 </button>
                 <button
                   onClick={handleEditDescription}
                   className="px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)]"
                 >
-                  Save
+                  儲存
                 </button>
               </div>
             </div>

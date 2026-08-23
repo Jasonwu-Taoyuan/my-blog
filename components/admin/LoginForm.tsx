@@ -24,13 +24,13 @@ export default function LoginForm() {
       })
 
       if (result?.error) {
-        setError('Invalid email or password')
+        setError('帳號或密碼錯誤')
       } else {
         router.push('/admin')
         router.refresh()
       }
     } catch (error) {
-      setError('An error occurred. Please try again.')
+      setError('發生錯誤，請再試一次')
     } finally {
       setIsLoading(false)
     }
@@ -61,7 +61,7 @@ export default function LoginForm() {
 
         <div>
           <label htmlFor="password" className="block text-sm font-medium text-neutral-600">
-            Password
+            密碼
           </label>
           <input
             id="password"
@@ -79,7 +79,7 @@ export default function LoginForm() {
         disabled={isLoading}
         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent)] disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {isLoading ? 'Signing in...' : 'Sign in'}
+        {isLoading ? '登入中...' : '登入'}
       </button>
     </form>
   )

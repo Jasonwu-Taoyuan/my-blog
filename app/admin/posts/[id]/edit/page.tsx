@@ -42,12 +42,12 @@ export default function EditPostPage({ params }: Props) {
   }
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>載入中...</div>
   }
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-neutral-900 mb-8">Edit Post</h1>
+      <h1 className="text-3xl font-bold text-neutral-900 mb-8">編輯文章</h1>
       <div className="bg-white rounded-lg shadow p-6">
         <PostEditor
           initialData={post}

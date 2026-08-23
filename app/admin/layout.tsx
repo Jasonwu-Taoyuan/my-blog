@@ -15,12 +15,12 @@ export default async function AdminLayout({
   }
 
   const navItems = [
-    { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { href: '/admin/posts', label: 'Posts', icon: FileText },
-    { href: '/admin/photos', label: 'Photos', icon: Image },
-    { href: '/admin/travel', label: '旅遊地點', icon: MapPin },
+    { href: '/admin/dashboard', label: '儀表板', icon: LayoutDashboard },
+    { href: '/admin/posts', label: '文章', icon: FileText },
+    { href: '/admin/photos', label: '相片', icon: Image },
+    { href: '/admin/travel', label: '旅遊地圖', icon: MapPin },
     { href: '/admin/mind-maps', label: '思維導圖', icon: GitBranch },
-    { href: '/admin/about', label: 'About', icon: User },
+    { href: '/admin/about', label: '關於我', icon: User },
   ]
 
   return (
@@ -36,7 +36,7 @@ export default async function AdminLayout({
               J
             </div>
             <div className="min-w-0">
-              <h2 className="text-base font-bold text-neutral-900 leading-tight">Admin Panel</h2>
+              <h2 className="text-base font-bold text-neutral-900 leading-tight">後台管理</h2>
               <p className="text-xs text-neutral-400 truncate">{session.user?.email}</p>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default async function AdminLayout({
               className="flex items-center gap-3 text-sm font-medium text-neutral-400 hover:text-red-500 transition-colors"
             >
               <LogOut className="h-[18px] w-[18px]" />
-              Sign Out
+              登出
             </a>
           </div>
         </aside>

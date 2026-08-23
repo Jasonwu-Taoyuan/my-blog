@@ -23,7 +23,7 @@ export default function NewPostPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-neutral-900 mb-8">New Post</h1>
+      <h1 className="text-3xl font-bold text-neutral-900 mb-8">新增文章</h1>
       <div className="bg-white rounded-lg shadow p-6">
         <PostEditor onSave={handleSave} onCancel={() => router.push('/admin/posts')} />
       </div>

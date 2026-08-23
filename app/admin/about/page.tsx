@@ -47,30 +47,30 @@ export default function AdminAboutPage() {
       })
 
       if (response.ok) {
-        alert('About page updated successfully!')
+        alert('關於我頁面已更新！')
       } else {
         throw new Error('Failed to update')
       }
     } catch (error) {
       console.error('Save failed:', error)
-      alert('Failed to update about page')
+      alert('更新失敗')
     } finally {
       setSaving(false)
     }
   }
 
   if (loading) {
-    return <div className="text-neutral-400">Loading...</div>
+    return <div className="text-neutral-400">載入中...</div>
   }
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-neutral-900 mb-8">Edit About Page</h1>
+      <h1 className="text-3xl font-bold text-neutral-900 mb-8">編輯關於我頁面</h1>
       <div className="bg-white rounded-lg border border-neutral-200 p-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-neutral-600 mb-2">
-              Display Name *
+              顯示名稱 *
             </label>
             <input
               type="text"
@@ -83,7 +83,7 @@ export default function AdminAboutPage() {
 
           <div>
             <label className="block text-sm font-medium text-neutral-600 mb-2">
-              Headline *
+              副標題 *
             </label>
             <input
               type="text"
@@ -96,7 +96,7 @@ export default function AdminAboutPage() {
 
           <div>
             <label className="block text-sm font-medium text-neutral-600 mb-2">
-              Bio (Markdown) *
+              個人簡介（Markdown）*
             </label>
             <textarea
               value={bioMarkdown}
@@ -109,13 +109,13 @@ export default function AdminAboutPage() {
 
           <div>
             <label className="block text-sm font-medium text-neutral-600 mb-2">
-              Skills (comma separated)
+              專長（以逗號分隔）
             </label>
             <input
               type="text"
               value={skills}
               onChange={(e) => setSkills(e.target.value)}
-              placeholder="React, Next.js, TypeScript"
+              placeholder="營運管理, 流程優化, 團隊領導"
               className="w-full px-4 py-2 bg-neutral-50 border border-neutral-300 rounded-lg text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
             />
           </div>
@@ -127,14 +127,14 @@ export default function AdminAboutPage() {
               className="px-4 py-2 text-neutral-600 bg-neutral-100 border border-neutral-300 rounded-lg hover:bg-neutral-200"
               disabled={saving}
             >
-              Cancel
+              取消
             </button>
             <button
               type="submit"
               className="px-4 py-2 text-white bg-[var(--accent)] rounded-lg hover:bg-[var(--accent-hover)]"
               disabled={saving}
             >
-              {saving ? 'Saving...' : 'Save Changes'}
+              {saving ? '儲存中...' : '儲存變更'}
             </button>
           </div>
         </form>

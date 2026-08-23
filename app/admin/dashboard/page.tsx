@@ -11,15 +11,15 @@ export default async function DashboardPage() {
   ])
 
   const stats = [
-    { label: 'Total Posts', value: postsCount, icon: FileText, color: 'bg-[var(--accent)]' },
-    { label: 'Published', value: publishedCount, icon: Eye, color: 'bg-green-500' },
-    { label: 'Drafts', value: draftCount, icon: FileText, color: 'bg-yellow-500' },
-    { label: 'Photos', value: photosCount, icon: Image, color: 'bg-purple-500' },
+    { label: '文章總數', value: postsCount, icon: FileText, color: 'bg-[var(--accent)]' },
+    { label: '已發布', value: publishedCount, icon: Eye, color: 'bg-green-500' },
+    { label: '草稿', value: draftCount, icon: FileText, color: 'bg-yellow-500' },
+    { label: '相片', value: photosCount, icon: Image, color: 'bg-purple-500' },
   ]
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-neutral-900 mb-8">Dashboard</h1>
+      <h1 className="text-3xl font-bold text-neutral-900 mb-8">儀表板</h1>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -43,28 +43,28 @@ export default async function DashboardPage() {
 
       {/* Quick Actions */}
       <div className="bg-white rounded-lg border border-neutral-200 p-6">
-        <h2 className="text-xl font-bold text-neutral-900 mb-4">Quick Actions</h2>
+        <h2 className="text-xl font-bold text-neutral-900 mb-4">快速操作</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link
             href="/admin/posts/new"
             className="block p-4 border-2 border-[var(--accent)] rounded-lg hover:bg-[var(--accent)]/10 transition-colors text-center"
           >
             <FileText className="h-8 w-8 mx-auto mb-2 text-[var(--accent)]" />
-            <span className="font-medium text-neutral-900">New Post</span>
+            <span className="font-medium text-neutral-900">新增文章</span>
           </Link>
           <Link
             href="/admin/photos"
             className="block p-4 border-2 border-purple-500 rounded-lg hover:bg-purple-500/10 transition-colors text-center"
           >
             <Image className="h-8 w-8 mx-auto mb-2 text-purple-500" />
-            <span className="font-medium text-neutral-900">Upload Photo</span>
+            <span className="font-medium text-neutral-900">上傳相片</span>
           </Link>
           <Link
             href="/admin/posts"
             className="block p-4 border-2 border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors text-center"
           >
             <FileText className="h-8 w-8 mx-auto mb-2 text-neutral-400" />
-            <span className="font-medium text-neutral-900">Manage Posts</span>
+            <span className="font-medium text-neutral-900">管理文章</span>
           </Link>
         </div>
       </div>

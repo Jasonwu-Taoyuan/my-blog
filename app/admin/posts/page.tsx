@@ -23,13 +23,13 @@ export default async function AdminPostsPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-neutral-900">Manage Posts</h1>
+        <h1 className="text-4xl font-bold text-neutral-900">文章管理</h1>
         <Link
           href="/admin/posts/new"
           className="flex items-center px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] transition-colors"
         >
           <Plus className="h-5 w-5 mr-2" />
-          New Post
+          新增文章
         </Link>
       </div>
 
@@ -39,22 +39,22 @@ export default async function AdminPostsPage() {
             <thead className="bg-neutral-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                  Title
+                  標題
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                  Category
+                  分類
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                  Status
+                  狀態
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                  Published
+                  發布日期
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                  Tags
+                  標籤
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                  Actions
+                  操作
                 </th>
               </tr>
             </thead>
@@ -82,13 +82,13 @@ export default async function AdminPostsPage() {
                           : 'bg-yellow-50 text-yellow-700'
                       }`}
                     >
-                      {post.status}
+                      {post.status === 'published' ? '已發布' : '草稿'}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-400">
                     {post.publishedAt
                       ? formatDate(post.publishedAt)
-                      : 'Not published'}
+                      : '尚未發布'}
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex flex-wrap gap-1">
@@ -120,13 +120,13 @@ export default async function AdminPostsPage() {
         </div>
       ) : (
         <div className="text-center py-12 bg-white rounded-lg border border-neutral-200">
-          <p className="text-neutral-400 mb-4">No posts yet.</p>
+          <p className="text-neutral-400 mb-4">尚無文章。</p>
           <Link
             href="/admin/posts/new"
             className="inline-flex items-center px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] transition-colors"
           >
             <Plus className="h-5 w-5 mr-2" />
-            Create your first post
+            建立第一篇文章
           </Link>
         </div>
       )}
