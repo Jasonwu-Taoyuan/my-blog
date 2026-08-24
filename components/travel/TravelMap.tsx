@@ -81,6 +81,10 @@ export default function TravelMap({ trips }: { trips: TripPoint[] }) {
     map.addControl(new NavigationControl({ showCompass: false }), 'top-left')
     map.addControl(new AttributionControl({ compact: false, customAttribution: mapAttribution }))
 
+    map.on('error', (e) => {
+      console.error('[TravelMap] MapLibre error:', e.error?.message || e.error, e)
+    })
+
     const markers = trips.map((trip) => {
       const popup = new Popup({ offset: 25 }).setHTML(popupHtml(trip))
       return new Marker({ element: pinElement(), anchor: 'bottom' })
