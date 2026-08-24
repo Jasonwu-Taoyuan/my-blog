@@ -55,6 +55,9 @@ NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="<generate-with-openssl-rand-base64-32>"
 ADMIN_EMAIL="admin@example.com"
 ADMIN_PASSWORD="your-secure-password"
+
+# 選填：旅遊地圖顯示繁體中文地名（到 maptiler.com 免費註冊取得）
+NEXT_PUBLIC_MAPTILER_KEY=""
 ```
 
 生成 NEXTAUTH_SECRET:

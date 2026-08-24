@@ -1,6 +1,6 @@
 'use client'
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, AttributionControl } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
@@ -29,6 +29,16 @@ const pinIcon = L.divIcon({
   popupAnchor: [0, -22],
 })
 
+const MAPTILER_KEY = process.env.NEXT_PUBLIC_MAPTILER_KEY
+
+const tileUrl = MAPTILER_KEY
+  ? `https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=${MAPTILER_KEY}&language=zh-Hant`
+  : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+
+const tileAttribution = MAPTILER_KEY
+  ? '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap 貢獻者</a>'
+  : '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> 貢獻者'
+
 export default function TravelMap({ trips }: { trips: TripPoint[] }) {
   const center: [number, number] =
     trips.length > 0 ? [trips[0].lat, trips[0].lng] : [23.5, 121]
@@ -39,11 +49,10 @@ export default function TravelMap({ trips }: { trips: TripPoint[] }) {
       zoom={trips.length > 0 ? 3 : 4}
       scrollWheelZoom
       style={{ height: 480, width: '100%', borderRadius: 20 }}
+      attributionControl={false}
     >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+      <AttributionControl prefix={false} />
+      <TileLayer attribution={tileAttribution} url={tileUrl} />
       {trips.map((trip) => (
         <Marker key={trip.id} position={[trip.lat, trip.lng]} icon={pinIcon}>
           <Popup>
