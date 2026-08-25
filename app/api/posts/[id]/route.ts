@@ -58,6 +58,14 @@ export async function PUT(
     }
     if (publishedAt) {
       data.publishedAt = new Date(publishedAt)
+    } else if (status === 'published') {
+      const existing = await prisma.post.findUnique({
+        where: { id },
+        select: { publishedAt: true },
+      })
+      if (!existing?.publishedAt) {
+        data.publishedAt = new Date()
+      }
     }
 
     const post = await prisma.post.update({

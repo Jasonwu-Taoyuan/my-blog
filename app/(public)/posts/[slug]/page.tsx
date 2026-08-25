@@ -55,24 +55,26 @@ export default async function PostPage({ params }: Props) {
   const tags = JSON.parse(post.tags || '[]')
 
   // Get prev/next posts
-  const [prevPost, nextPost] = await Promise.all([
-    prisma.post.findFirst({
-      where: {
-        status: 'published',
-        publishedAt: { lt: post.publishedAt },
-      },
-      orderBy: { publishedAt: 'desc' },
-      select: { slug: true, title: true },
-    }),
-    prisma.post.findFirst({
-      where: {
-        status: 'published',
-        publishedAt: { gt: post.publishedAt },
-      },
-      orderBy: { publishedAt: 'asc' },
-      select: { slug: true, title: true },
-    }),
-  ])
+  const [prevPost, nextPost] = post.publishedAt
+    ? await Promise.all([
+        prisma.post.findFirst({
+          where: {
+            status: 'published',
+            publishedAt: { lt: post.publishedAt },
+          },
+          orderBy: { publishedAt: 'desc' },
+          select: { slug: true, title: true },
+        }),
+        prisma.post.findFirst({
+          where: {
+            status: 'published',
+            publishedAt: { gt: post.publishedAt },
+          },
+          orderBy: { publishedAt: 'asc' },
+          select: { slug: true, title: true },
+        }),
+      ])
+    : [null, null]
 
   return (
     <article>
