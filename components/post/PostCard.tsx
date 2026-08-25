@@ -32,7 +32,7 @@ export default function PostCard({ post }: PostCardProps) {
               src={post.coverImageUrl}
               alt={post.title}
               fill
-              className="object-cover"
+              className="object-cover object-top"
             />
           </div>
         </Link>
