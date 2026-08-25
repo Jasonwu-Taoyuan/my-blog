@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { auth } from '@/auth'
+import MobileNav from './MobileNav'
 
 const NAV_ITEMS = [
   { href: '/', label: '首頁' },
@@ -45,8 +46,8 @@ export default async function Header() {
           </div>
         </Link>
 
-        {/* Navigation */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex" style={{ alignItems: 'center', gap: 2 }}>
           {NAV_ITEMS.map((item) => (
             <Link key={item.href} href={item.href} className="header-nav-item">
               {item.label}
@@ -58,6 +59,9 @@ export default async function Header() {
             </Link>
           )}
         </div>
+
+        {/* Mobile Navigation */}
+        <MobileNav navItems={NAV_ITEMS} isLoggedIn={!!session?.user} />
       </nav>
     </header>
   )
