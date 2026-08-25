@@ -58,8 +58,10 @@ export default function PostEditor({
       })
 
       const data = await response.json()
-      if (data.url) {
+      if (response.ok && data.url) {
         setCoverImageUrl(data.url)
+      } else {
+        alert(data.error || '圖片上傳失敗')
       }
     } catch (error) {
       console.error('Upload failed:', error)

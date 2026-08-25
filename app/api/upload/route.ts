@@ -25,6 +25,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid folder' }, { status: 400 })
     }
 
+    const ext = file.name.split('.').pop()?.toLowerCase() || ''
+    const allowedExts = ['jpg', 'jpeg', 'png', 'gif', 'webp']
+    if (!allowedExts.includes(ext)) {
+      return NextResponse.json(
+        {
+          error:
+            ext === 'heic' || ext === 'heif'
+              ? '不支援 iPhone 的 HEIC/HEIF 格式，瀏覽器無法直接顯示，請先在手機或電腦上轉存成 JPG 或 PNG 再上傳。'
+              : `不支援的圖片格式（.${ext || '未知'}），請上傳 JPG、PNG、GIF 或 WebP 格式。`,
+        },
+        { status: 400 }
+      )
+    }
+
     const url = await saveImage(file, folder)
 
     return NextResponse.json({ url })

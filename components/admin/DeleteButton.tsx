@@ -21,7 +21,7 @@ export default function DeleteButton({ postId, postTitle }: DeleteButtonProps) {
     setIsDeleting(true)
 
     try {
-      const response = await fetch(`/api/admin/posts/${postId}`, {
+      const response = await fetch(`/api/posts/${postId}`, {
         method: 'DELETE',
       })
 

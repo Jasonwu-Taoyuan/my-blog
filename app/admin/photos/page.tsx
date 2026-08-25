@@ -58,6 +58,7 @@ export default function AdminPhotosPage() {
 
   const handleUploadAll = async () => {
     setUploading(true)
+    const failed: string[] = []
     try {
       for (const photo of pendingPhotos) {
         const formData = new FormData()
@@ -70,6 +71,11 @@ export default function AdminPhotosPage() {
         })
 
         const uploadData = await uploadRes.json()
+
+        if (!uploadRes.ok || !uploadData.url) {
+          failed.push(`${photo.file.name}：${uploadData.error || '上傳失敗'}`)
+          continue
+        }
 
         await fetch('/api/photos', {
           method: 'POST',
@@ -85,6 +91,10 @@ export default function AdminPhotosPage() {
       await fetchPhotos()
       setPendingPhotos([])
       setShowUploadModal(false)
+
+      if (failed.length > 0) {
+        alert(`以下相片上傳失敗：\n${failed.join('\n')}`)
+      }
     } catch (error) {
       console.error('Upload failed:', error)
       alert('相片上傳失敗')
