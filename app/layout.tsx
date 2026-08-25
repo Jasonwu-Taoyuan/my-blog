@@ -1,7 +1,15 @@
 import type { Metadata } from 'next'
+import { Noto_Sans_TC } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+
+const notoSansTC = Noto_Sans_TC({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-noto-sans-tc',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'My Blog',
@@ -14,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="zh-TW">
+    <html lang="zh-TW" className={notoSansTC.variable}>
       <head>
         <link rel="stylesheet" href="/mind-elixir.css" />
       </head>
