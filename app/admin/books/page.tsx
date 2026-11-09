@@ -5,6 +5,7 @@ import { fetchBooks, type Book } from '@/lib/notion'
 import { prisma } from '@/lib/prisma'
 import StarRating from '@/components/books/StarRating'
 import UnhideButton from '@/components/books/UnhideButton'
+import BookGraphBuilder from '@/components/books/BookGraphBuilder'
 
 export default async function AdminBooksPage() {
   let books: Book[] = []
@@ -31,6 +32,8 @@ export default async function AdminBooksPage() {
         <BookOpen className="h-7 w-7 text-[var(--accent)]" />
         <h1 className="text-3xl font-bold text-neutral-900">讀書清單管理</h1>
       </div>
+
+      <BookGraphBuilder />
 
       {error && (
         <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 mb-8 text-sm">

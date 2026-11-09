@@ -24,6 +24,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "easymde": "^2.20.0",
+    "force-graph": "1.51.5",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.563.0",
     "mind-elixir": "^5.9.1",

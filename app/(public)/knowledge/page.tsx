@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, BookOpen, NotebookText, Sparkles } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, BookOpen, NotebookText, Sparkles, Waypoints } from 'lucide-react'
 import { fetchBooks } from '@/lib/notion'
 import { prisma } from '@/lib/prisma'
 import { KNOWLEDGE_LEGACY_CATEGORIES } from '@/lib/categories'
@@ -11,7 +11,7 @@ export const metadata = {
   description: '讀書筆記、歷史與跨領域思考的整理。完整心智圖與長文筆記收錄在知識宮殿。',
 }
 
-const KNOWLEDGE_PALACE_URL = 'https://memorygym-app.zeabur.app/mind-maps'
+const KNOWLEDGE_PALACE_URL = 'https://memory-palace-jason.up.railway.app/mind-maps'
 
 export default async function KnowledgePage() {
   let bookCount = 0
@@ -37,6 +37,15 @@ export default async function KnowledgePage() {
       count: `${bookCount} 本書籍`,
       color: 'var(--accent)',
       icon: <BookOpen size={22} />,
+    },
+    {
+      href: '/knowledge/graph',
+      external: false,
+      name: '知識圖譜',
+      desc: '讀過的書透過共同概念連成一張網',
+      count: '探索跨領域連結',
+      color: 'var(--sky)',
+      icon: <Waypoints size={22} />,
     },
     {
       href: '/knowledge/articles',

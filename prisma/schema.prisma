@@ -105,3 +105,21 @@ model BookReview {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+// ── 讀書清單知識圖譜 ─────────────────────────────────────
+// AI 為每本書抽出的核心概念；共用概念的書會在圖譜上連在一起
+model BookConcept {
+  id        String   @id @default(cuid())
+  notionId  String
+  concept   String
+  createdAt DateTime @default(now())
+
+  @@unique([notionId, concept])
+  @@index([concept])
+}
+
+// 已處理過的書（含抽不出概念的），用來接續處理新書
+model BookGraphProcessed {
+  notionId    String   @id
+  title       String
+  processedAt DateTime @default(now())
+}

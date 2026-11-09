@@ -46,8 +46,13 @@ export default async function BooksPage() {
 
       <div className="mb-8 flex items-baseline justify-between flex-wrap gap-2">
         <h1 className="text-4xl font-bold text-neutral-900 tracking-tight">讀書清單</h1>
+        <Link href="/knowledge/graph"
+              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              style={{ background: 'var(--accent)' }}>
+          🕸 知識圖譜
+        </Link>
         {visibleBooks.length > 0 && (
-          <p className="text-sm text-neutral-400">
+          <p className="text-sm text-neutral-400 w-full">
             共 <span className="font-semibold" style={{ color: 'var(--accent)' }}>{visibleBooks.length}</span> 本書籍 ·
             資料來源：Notion
           </p>
