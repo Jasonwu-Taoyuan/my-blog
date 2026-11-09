@@ -69,7 +69,7 @@ ${list}
 }
 
 export function parseConcepts(raw: unknown, count: number): string[][] {
-  const out: string[][] = Array.from({ length: count }, () => [])
+  const out: string[][] = Array.from({ length: count }, (): string[] => [])
   const obj = Array.isArray(raw)
     ? Object.fromEntries(raw.map((v, i) => [String(i + 1), v]))
     : (raw && typeof raw === 'object' ? raw as Record<string, unknown> : {})
